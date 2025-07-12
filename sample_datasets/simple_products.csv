@@ -1,0 +1,11 @@
+id,name,price,category,in_stock
+1,Laptop,999.99,Electronics,true
+2,Mouse,29.99,Electronics,true
+3,Keyboard,79.99,Electronics,false
+4,Monitor,299.99,Electronics,true
+5,Desk,199.99,Furniture,true
+6,Chair,149.99,Furniture,true
+7,Lamp,49.99,Furniture,false
+8,Notebook,4.99,Stationery,true
+9,Pen,1.99,Stationery,true
+10,Tablet,599.99,Electronics,true

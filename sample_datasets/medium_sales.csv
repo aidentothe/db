@@ -1,0 +1,11 @@
+transaction_id,customer_id,product_id,product_name,category,subcategory,price,quantity,discount,total,payment_method,store_location,salesperson_id,transaction_date,customer_age
+1,101,501,Gaming Laptop,Electronics,Computers,1299.99,1,0.1,1169.99,Credit Card,New York,201,2024-01-15,28
+2,102,502,Wireless Mouse,Electronics,Accessories,39.99,2,0.05,75.98,Debit Card,Los Angeles,202,2024-01-15,34
+3,103,503,Mechanical Keyboard,Electronics,Accessories,129.99,1,0,129.99,Cash,Chicago,203,2024-01-16,42
+4,104,504,4K Monitor,Electronics,Displays,449.99,1,0.15,382.49,Credit Card,Houston,204,2024-01-16,29
+5,105,505,Office Desk,Furniture,Office,299.99,1,0.2,239.99,Credit Card,Phoenix,205,2024-01-17,37
+6,106,506,Ergonomic Chair,Furniture,Office,249.99,1,0.1,224.99,Debit Card,Philadelphia,206,2024-01-17,45
+7,107,507,LED Desk Lamp,Furniture,Lighting,79.99,2,0,159.98,Cash,San Antonio,207,2024-01-18,31
+8,108,508,Premium Notebook,Stationery,Paper,12.99,5,0.05,61.71,Credit Card,San Diego,208,2024-01-18,26
+9,109,509,Luxury Pen Set,Stationery,Writing,89.99,1,0.25,67.49,Debit Card,Dallas,209,2024-01-19,52
+10,110,510,iPad Pro,Electronics,Tablets,899.99,1,0.1,809.99,Credit Card,San Jose,210,2024-01-19,33

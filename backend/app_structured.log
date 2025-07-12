@@ -1,0 +1,190 @@
+{"timestamp": "2025-07-10T22:32:04.465872", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T00:44:43.438378", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T00:45:46.089150", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T00:45:47.235579", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T02:44:35.141586", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T02:44:36.200953", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T02:45:30.879549", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T02:47:44.982799", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T02:47:46.043780", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:32:23.557363", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:32:24.595649", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:33:43.965062", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:43.966094", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:43.967219", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:43.968392", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:47.033828", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:48.694785", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:48.702968", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:48.713179", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:33:51.325617", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:33:56.566179", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:35:02.233145", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:37:07.941677", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:37:13.867699", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:37:13.868152", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-11T03:37:13.868757", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:37:13.868975", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-11T03:37:13.869130", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.00016498565673828125}
+{"timestamp": "2025-07-11T03:37:14.106978", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.23881173133850098}
+{"timestamp": "2025-07-11T03:37:14.109222", "level": "ERROR", "logger": "__main__", "message": "Sample datasets listing failed", "operation": "sample_datasets_list_failed", "processing_time": 0.23900699615478516, "error_type": "TypeError"}
+{"timestamp": "2025-07-11T03:37:21.320631", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T03:37:21.320771", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-11T03:37:21.321407", "level": "INFO", "logger": "__main__", "message": "File validation started", "operation": "file_validation"}
+{"timestamp": "2025-07-11T03:37:21.322469", "level": "INFO", "logger": "__main__", "message": "Saving file to disk", "operation": "file_save_start", "file_name": "list.csv"}
+{"timestamp": "2025-07-11T03:37:21.322904", "level": "INFO", "logger": "__main__", "message": "File saved successfully", "operation": "file_save_complete", "file_name": "list.csv", "file_size": 6401}
+{"timestamp": "2025-07-11T03:37:21.322984", "level": "INFO", "logger": "__main__", "message": "Starting CSV processing", "operation": "csv_processing_start", "file_name": "list.csv", "file_size": 6401}
+{"timestamp": "2025-07-11T03:37:21.323388", "level": "INFO", "logger": "__main__", "message": "Cleaned up failed upload file", "operation": "file_cleanup"}
+{"timestamp": "2025-07-11T03:37:21.325054", "level": "ERROR", "logger": "__main__", "message": "CSV processing failed", "operation": "csv_processing_failed", "file_name": "list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-11T03:38:06.162922", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:38:10.611551", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T03:38:12.170906", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:45:28.600365", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:45:30.117907", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:46:04.581218", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T05:46:04.581924", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T05:46:04.582219", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-11T05:46:04.582365", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-11T05:46:04.582495", "level": "WARNING", "logger": "__main__", "message": "Sample datasets directory not found", "operation": "sample_datasets_list_failed", "error_type": "directory_not_found"}
+{"timestamp": "2025-07-11T05:46:04.583429", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.0011217594146728516}
+{"timestamp": "2025-07-11T05:48:01.905672", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T05:48:01.907125", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-11T05:48:01.907933", "level": "INFO", "logger": "__main__", "message": "File validation started", "operation": "file_validation"}
+{"timestamp": "2025-07-11T05:48:01.908234", "level": "INFO", "logger": "__main__", "message": "Saving file to disk", "operation": "file_save_start", "file_name": "list.csv"}
+{"timestamp": "2025-07-11T05:48:01.908543", "level": "INFO", "logger": "__main__", "message": "File saved successfully", "operation": "file_save_complete", "file_name": "list.csv", "file_size": 6401}
+{"timestamp": "2025-07-11T05:48:01.908590", "level": "INFO", "logger": "__main__", "message": "Starting CSV processing", "operation": "csv_processing_start", "file_name": "list.csv", "file_size": 6401}
+{"timestamp": "2025-07-11T05:48:01.909713", "level": "INFO", "logger": "__main__", "message": "Cleaned up failed upload file", "operation": "file_cleanup"}
+{"timestamp": "2025-07-11T05:48:01.911767", "level": "ERROR", "logger": "__main__", "message": "CSV processing failed", "operation": "csv_processing_failed", "file_name": "list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-11T05:49:10.500165", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:49:16.488317", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:49:36.634529", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:49:42.252821", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:49:49.443237", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:49:54.078526", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:50:00.881004", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T05:50:06.549855", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T23:05:45.169076", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T23:05:47.105936", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-11T23:05:48.536038", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-11T23:05:48.536160", "level": "INFO", "logger": "__main__", "message": "Health check requested", "operation": "health_check"}
+{"timestamp": "2025-07-11T23:05:48.536230", "level": "INFO", "logger": "__main__", "message": "Health check completed successfully", "operation": "health_check_success"}
+{"timestamp": "2025-07-11T23:15:13.197260", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T18:29:43.415759", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T18:29:45.115688", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T18:29:48.340437", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T18:29:48.340806", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T18:29:48.577052", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.23613190650939941}
+{"timestamp": "2025-07-12T18:29:53.293192", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T18:29:53.293326", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T18:29:53.294101", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T18:29:53.300913", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.007563114166259766}
+{"timestamp": "2025-07-12T18:29:58.402444", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T18:29:58.402908", "level": "INFO", "logger": "__main__", "message": "Sample dataset load started", "operation": "sample_dataset_load_start", "file_name": "simple_products.csv"}
+{"timestamp": "2025-07-12T18:29:58.403009", "level": "INFO", "logger": "__main__", "message": "Loading sample dataset", "operation": "sample_dataset_load_start", "file_name": "simple_products.csv", "file_size": 345}
+{"timestamp": "2025-07-12T18:29:58.404208", "level": "INFO", "logger": "__main__", "message": "Sample dataset loaded", "operation": "sample_dataset_load_complete", "file_name": "simple_products.csv", "processing_time": 0.0011150836944580078, "row_count": 10}
+{"timestamp": "2025-07-12T18:29:58.405397", "level": "INFO", "logger": "__main__", "message": "Sample dataset load completed successfully", "operation": "sample_dataset_load_complete", "file_name": "simple_products.csv", "processing_time": 0.0024781227111816406, "row_count": 10}
+{"timestamp": "2025-07-12T18:30:02.804645", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T18:30:02.804762", "level": "INFO", "logger": "__main__", "message": "File load started", "operation": "file_load_start", "file_name": "20250710_230044_test_upload.csv"}
+{"timestamp": "2025-07-12T18:30:02.804828", "level": "INFO", "logger": "__main__", "message": "Loading CSV file", "operation": "csv_load_start", "file_name": "20250710_230044_test_upload.csv", "file_size": 139}
+{"timestamp": "2025-07-12T18:30:02.805966", "level": "INFO", "logger": "__main__", "message": "CSV file loaded", "operation": "csv_load_complete", "file_name": "20250710_230044_test_upload.csv", "processing_time": 0.0010712146759033203, "row_count": 5}
+{"timestamp": "2025-07-12T18:30:02.807053", "level": "INFO", "logger": "__main__", "message": "Complexity analysis completed", "operation": "complexity_analysis_complete", "file_name": "20250710_230044_test_upload.csv", "processing_time": 0.0009961128234863281}
+{"timestamp": "2025-07-12T18:30:02.807106", "level": "INFO", "logger": "__main__", "message": "File load completed successfully", "operation": "file_load_complete", "file_name": "20250710_230044_test_upload.csv", "processing_time": 0.0023627281188964844, "row_count": 5}
+{"timestamp": "2025-07-12T20:16:40.187919", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:16:40.188754", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:16:40.189039", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T20:16:40.189161", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T20:16:40.195420", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T20:16:40.236047", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.04679703712463379}
+{"timestamp": "2025-07-12T20:16:40.480819", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.2917368412017822}
+{"timestamp": "2025-07-12T20:22:43.071907", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:22:43.073049", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T20:22:43.080275", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:22:43.080386", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T20:22:43.081734", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T20:22:43.089722", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.009284019470214844}
+{"timestamp": "2025-07-12T20:22:43.325356", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.2522561550140381}
+{"timestamp": "2025-07-12T20:48:41.930448", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:48:41.931278", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-12T20:48:41.933309", "level": "INFO", "logger": "__main__", "message": "File validation started", "operation": "file_validation"}
+{"timestamp": "2025-07-12T20:48:41.937503", "level": "INFO", "logger": "__main__", "message": "Saving file to disk", "operation": "file_save_start", "file_name": "leads3.csv"}
+{"timestamp": "2025-07-12T20:48:41.937881", "level": "INFO", "logger": "__main__", "message": "File saved successfully", "operation": "file_save_complete", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T20:48:41.937983", "level": "INFO", "logger": "__main__", "message": "Starting CSV processing", "operation": "csv_processing_start", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T20:48:41.939128", "level": "INFO", "logger": "__main__", "message": "Cleaned up failed upload file", "operation": "file_cleanup"}
+{"timestamp": "2025-07-12T20:48:41.943037", "level": "ERROR", "logger": "__main__", "message": "CSV processing failed", "operation": "csv_processing_failed", "file_name": "leads3.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T20:53:27.998222", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:53:27.998979", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:53:27.999440", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T20:53:27.999673", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T20:53:28.003428", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T20:53:28.027687", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.027565956115722656}
+{"timestamp": "2025-07-12T20:53:28.278120", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.27861881256103516}
+{"timestamp": "2025-07-12T20:58:33.083081", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:58:33.083957", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-12T20:58:33.084885", "level": "INFO", "logger": "__main__", "message": "File validation started", "operation": "file_validation"}
+{"timestamp": "2025-07-12T20:58:33.085097", "level": "INFO", "logger": "__main__", "message": "Saving file to disk", "operation": "file_save_start", "file_name": "leads3.csv"}
+{"timestamp": "2025-07-12T20:58:33.085451", "level": "INFO", "logger": "__main__", "message": "File saved successfully", "operation": "file_save_complete", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T20:58:33.085499", "level": "INFO", "logger": "__main__", "message": "Starting CSV processing", "operation": "csv_processing_start", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T20:58:33.086345", "level": "INFO", "logger": "__main__", "message": "Cleaned up failed upload file", "operation": "file_cleanup"}
+{"timestamp": "2025-07-12T20:58:33.087271", "level": "ERROR", "logger": "__main__", "message": "CSV processing failed", "operation": "csv_processing_failed", "file_name": "leads3.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T20:59:45.029307", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:59:45.030232", "level": "INFO", "logger": "__main__", "message": "Health check requested", "operation": "health_check"}
+{"timestamp": "2025-07-12T20:59:45.030374", "level": "INFO", "logger": "__main__", "message": "Health check completed successfully", "operation": "health_check_success"}
+{"timestamp": "2025-07-12T20:59:55.039059", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T20:59:55.039681", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-12T20:59:55.040831", "level": "WARNING", "logger": "__main__", "message": "Upload failed: No file provided", "operation": "file_upload_validation_failed", "error_type": "no_file_provided"}
+{"timestamp": "2025-07-12T21:01:05.069963", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:01:05.072518", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:01:05.075306", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T21:01:05.075925", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T21:01:05.084644", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T21:01:05.122339", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.046372175216674805}
+{"timestamp": "2025-07-12T21:01:05.439626", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.3644981384277344}
+{"timestamp": "2025-07-12T21:01:12.092029", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:01:12.092281", "level": "INFO", "logger": "__main__", "message": "File upload started", "operation": "file_upload_start"}
+{"timestamp": "2025-07-12T21:01:12.093699", "level": "INFO", "logger": "__main__", "message": "File validation started", "operation": "file_validation"}
+{"timestamp": "2025-07-12T21:01:12.093892", "level": "INFO", "logger": "__main__", "message": "Saving file to disk", "operation": "file_save_start", "file_name": "leads3.csv"}
+{"timestamp": "2025-07-12T21:01:12.094287", "level": "INFO", "logger": "__main__", "message": "File saved successfully", "operation": "file_save_complete", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T21:01:12.094385", "level": "INFO", "logger": "__main__", "message": "Starting CSV processing", "operation": "csv_processing_start", "file_name": "leads3.csv", "file_size": 4853}
+{"timestamp": "2025-07-12T21:01:12.105082", "level": "INFO", "logger": "__main__", "message": "Cleaned up failed upload file", "operation": "file_cleanup"}
+{"timestamp": "2025-07-12T21:01:12.107523", "level": "ERROR", "logger": "__main__", "message": "CSV processing failed", "operation": "csv_processing_failed", "file_name": "leads3.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T21:02:45.682459", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:09:12.850395", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:09:12.850591", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:09:12.850901", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T21:09:12.851296", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T21:09:12.855253", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T21:09:12.886095", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.03501701354980469}
+{"timestamp": "2025-07-12T21:09:13.137168", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.28587913513183594}
+{"timestamp": "2025-07-12T21:09:56.706260", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:10:06.696166", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:10:16.685947", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:10:22.472964", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:10:28.385628", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:10:37.335092", "level": "INFO", "logger": "__main__", "message": "Starting Flask API server", "operation": "app_startup"}
+{"timestamp": "2025-07-12T21:13:17.931564", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:13:17.931741", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:13:17.932427", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing started", "operation": "sample_datasets_list_start"}
+{"timestamp": "2025-07-12T21:13:17.932597", "level": "INFO", "logger": "__main__", "message": "File listing started", "operation": "file_list_start"}
+{"timestamp": "2025-07-12T21:13:17.935708", "level": "WARNING", "logger": "__main__", "message": "Failed to process file in listing", "operation": "file_list_process_failed", "file_name": "20250711_152847_list.csv", "error_type": "ParserError"}
+{"timestamp": "2025-07-12T21:13:17.951765", "level": "INFO", "logger": "__main__", "message": "File listing completed", "operation": "file_list_complete", "processing_time": 0.01910877227783203}
+{"timestamp": "2025-07-12T21:13:18.220079", "level": "INFO", "logger": "__main__", "message": "Sample datasets listing completed", "operation": "sample_datasets_list_complete", "processing_time": 0.28760218620300293}
+{"timestamp": "2025-07-12T21:13:24.182669", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:13:24.182877", "level": "INFO", "logger": "__main__", "message": "File load started", "operation": "file_load_start", "file_name": "20250711_151008_leads_normalized.csv"}
+{"timestamp": "2025-07-12T21:13:24.182965", "level": "INFO", "logger": "__main__", "message": "Loading CSV file", "operation": "csv_load_start", "file_name": "20250711_151008_leads_normalized.csv", "file_size": 38700}
+{"timestamp": "2025-07-12T21:13:24.184878", "level": "INFO", "logger": "__main__", "message": "CSV file loaded", "operation": "csv_load_complete", "file_name": "20250711_151008_leads_normalized.csv", "processing_time": 0.0018007755279541016, "row_count": 228}
+{"timestamp": "2025-07-12T21:13:24.186821", "level": "INFO", "logger": "__main__", "message": "Complexity analysis completed", "operation": "complexity_analysis_complete", "file_name": "20250711_151008_leads_normalized.csv", "processing_time": 0.0017957687377929688}
+{"timestamp": "2025-07-12T21:13:24.186905", "level": "INFO", "logger": "__main__", "message": "File load completed successfully", "operation": "file_load_complete", "file_name": "20250711_151008_leads_normalized.csv", "processing_time": 0.004063129425048828, "row_count": 228}
+{"timestamp": "2025-07-12T21:13:25.224593", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:13:25.224697", "level": "INFO", "logger": "__main__", "message": "Query complexity analysis started", "operation": "query_complexity_analysis_start"}
+{"timestamp": "2025-07-12T21:13:25.224838", "level": "INFO", "logger": "__main__", "message": "Analyzing query complexity", "operation": "query_complexity_analysis_process"}
+{"timestamp": "2025-07-12T21:13:25.228127", "level": "INFO", "logger": "__main__", "message": "Query complexity analysis completed", "operation": "query_complexity_analysis_complete"}
+{"timestamp": "2025-07-12T21:13:27.187905", "level": "INFO", "logger": "__main__", "message": "Incoming request", "operation": "incoming_request"}
+{"timestamp": "2025-07-12T21:13:27.188992", "level": "INFO", "logger": "__main__", "message": "SQL query execution started", "operation": "sql_query_start"}
+{"timestamp": "2025-07-12T21:13:27.189404", "level": "ERROR", "logger": "__main__", "message": "SQL query execution failed", "operation": "sql_query_failed", "processing_time": 0.0009760856628417969, "error_type": "AttributeError"}
+{
+  "timestamp": "2025-07-12T21:37:54.508834",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}

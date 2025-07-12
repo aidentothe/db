@@ -1,0 +1,950 @@
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 11:29:43 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 11:29:43 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:43,415 - __main__ - INFO - Starting Flask API server
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+ * Serving Flask app 'app'
+ * Debug mode: on
+2025-07-12 11:29:43,467 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://192.168.86.41:5002
+2025-07-12 11:29:43,467 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-12 11:29:43,467 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 11:29:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 11:29:45 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:45,115 - __main__ - INFO - Starting Flask API server
+2025-07-12 11:29:45,133 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 11:29:45,141 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:48,340 - __main__ - INFO - Incoming request
+2025-07-12 11:29:48,340 - __main__ - INFO - Sample datasets listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:48,576 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 11:29:48,578 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 11:29:48] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 11:29:53,293 - __main__ - INFO - Incoming request
+2025-07-12 11:29:53,293 - __main__ - INFO - File listing started
+2025-07-12 11:29:53,294 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:53,300 - __main__ - INFO - File listing completed
+2025-07-12 11:29:53,301 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 11:29:53] "GET /api/uploaded-files HTTP/1.1" 200 -
+2025-07-12 11:29:58,402 - __main__ - INFO - Incoming request
+2025-07-12 11:29:58,402 - __main__ - INFO - Sample dataset load started
+2025-07-12 11:29:58,402 - __main__ - INFO - Loading sample dataset
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:58,404 - __main__ - INFO - Sample dataset loaded
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:29:58,405 - __main__ - INFO - Sample dataset load completed successfully
+2025-07-12 11:29:58,405 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 11:29:58] "GET /api/load-sample-dataset/simple_products.csv HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:30:02,804 - __main__ - INFO - Incoming request
+2025-07-12 11:30:02,804 - __main__ - INFO - File load started
+2025-07-12 11:30:02,804 - __main__ - INFO - Loading CSV file
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:30:02,805 - __main__ - INFO - CSV file loaded
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 11:30:02,807 - __main__ - INFO - Complexity analysis completed
+2025-07-12 11:30:02,807 - __main__ - INFO - File load completed successfully
+2025-07-12 11:30:02,807 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 11:30:02] "GET /api/load-uploaded-file/20250710_230044_test_upload.csv HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:16:40,186 - __main__ - INFO - Incoming request
+2025-07-12 13:16:40,187 - __main__ - INFO - Incoming request
+2025-07-12 13:16:40,189 - __main__ - INFO - Sample datasets listing started
+2025-07-12 13:16:40,189 - __main__ - INFO - File listing started
+2025-07-12 13:16:40,195 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:16:40,235 - __main__ - INFO - File listing completed
+2025-07-12 13:16:40,237 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:16:40] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:16:40,480 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 13:16:40,481 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:16:40] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 13:22:43,071 - __main__ - INFO - Incoming request
+2025-07-12 13:22:43,073 - __main__ - INFO - Sample datasets listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:22:43,080 - __main__ - INFO - Incoming request
+2025-07-12 13:22:43,080 - __main__ - INFO - File listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:22:43,081 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:22:43,089 - __main__ - INFO - File listing completed
+2025-07-12 13:22:43,090 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:22:43] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:22:43,325 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 13:22:43,326 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:22:43] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 13:48:41,930 - __main__ - INFO - Incoming request
+2025-07-12 13:48:41,931 - __main__ - INFO - File upload started
+2025-07-12 13:48:41,933 - __main__ - INFO - File validation started
+2025-07-12 13:48:41,937 - __main__ - INFO - Saving file to disk
+2025-07-12 13:48:41,937 - __main__ - INFO - File saved successfully
+2025-07-12 13:48:41,937 - __main__ - INFO - Starting CSV processing
+2025-07-12 13:48:41,939 - __main__ - INFO - Cleaned up failed upload file
+2025-07-12 13:48:41,943 - __main__ - ERROR - CSV processing failed
+2025-07-12 13:48:41,943 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:48:41] "[31m[1mPOST /api/upload-csv HTTP/1.1[0m" 400 -
+2025-07-12 13:53:27,997 - __main__ - INFO - Incoming request
+2025-07-12 13:53:27,998 - __main__ - INFO - Incoming request
+2025-07-12 13:53:27,999 - __main__ - INFO - Sample datasets listing started
+2025-07-12 13:53:27,999 - __main__ - INFO - File listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:53:28,003 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:53:28,027 - __main__ - INFO - File listing completed
+2025-07-12 13:53:28,032 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:53:28] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 13:53:28,278 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 13:53:28,279 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:53:28] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 13:58:33,083 - __main__ - INFO - Incoming request
+2025-07-12 13:58:33,083 - __main__ - INFO - File upload started
+2025-07-12 13:58:33,084 - __main__ - INFO - File validation started
+2025-07-12 13:58:33,085 - __main__ - INFO - Saving file to disk
+2025-07-12 13:58:33,085 - __main__ - INFO - File saved successfully
+2025-07-12 13:58:33,085 - __main__ - INFO - Starting CSV processing
+2025-07-12 13:58:33,086 - __main__ - INFO - Cleaned up failed upload file
+2025-07-12 13:58:33,087 - __main__ - ERROR - CSV processing failed
+2025-07-12 13:58:33,087 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:58:33] "[31m[1mPOST /api/upload-csv HTTP/1.1[0m" 400 -
+2025-07-12 13:59:45,029 - __main__ - INFO - Incoming request
+2025-07-12 13:59:45,030 - __main__ - INFO - Health check requested
+/Users/root1/Downloads/cs/personal/db/backend/app.py:158: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat(),
+2025-07-12 13:59:45,030 - __main__ - INFO - Health check completed successfully
+2025-07-12 13:59:45,030 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:59:45] "GET /api/health HTTP/1.1" 200 -
+2025-07-12 13:59:55,039 - __main__ - INFO - Incoming request
+2025-07-12 13:59:55,039 - __main__ - INFO - File upload started
+2025-07-12 13:59:55,040 - __main__ - WARNING - Upload failed: No file provided
+2025-07-12 13:59:55,041 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 13:59:55] "[31m[1mPOST /api/upload-csv HTTP/1.1[0m" 400 -
+2025-07-12 14:01:05,069 - __main__ - INFO - Incoming request
+2025-07-12 14:01:05,072 - __main__ - INFO - Incoming request
+2025-07-12 14:01:05,075 - __main__ - INFO - Sample datasets listing started
+2025-07-12 14:01:05,075 - __main__ - INFO - File listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:01:05,084 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:01:05,122 - __main__ - INFO - File listing completed
+2025-07-12 14:01:05,125 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:01:05] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:01:05,439 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 14:01:05,440 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:01:05] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 14:01:12,092 - __main__ - INFO - Incoming request
+2025-07-12 14:01:12,092 - __main__ - INFO - File upload started
+2025-07-12 14:01:12,093 - __main__ - INFO - File validation started
+2025-07-12 14:01:12,093 - __main__ - INFO - Saving file to disk
+2025-07-12 14:01:12,094 - __main__ - INFO - File saved successfully
+2025-07-12 14:01:12,094 - __main__ - INFO - Starting CSV processing
+2025-07-12 14:01:12,105 - __main__ - INFO - Cleaned up failed upload file
+2025-07-12 14:01:12,107 - __main__ - ERROR - CSV processing failed
+2025-07-12 14:01:12,108 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:01:12] "[31m[1mPOST /api/upload-csv HTTP/1.1[0m" 400 -
+2025-07-12 14:02:43,408 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:02:43,411 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:02:43,537 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:02:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:02:45 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:02:45,682 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:02:45,708 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:02:45,717 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:09:12,849 - __main__ - INFO - Incoming request
+2025-07-12 14:09:12,850 - __main__ - INFO - Incoming request
+2025-07-12 14:09:12,850 - __main__ - INFO - File listing started
+2025-07-12 14:09:12,851 - __main__ - INFO - Sample datasets listing started
+2025-07-12 14:09:12,855 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:09:12,885 - __main__ - INFO - File listing completed
+2025-07-12 14:09:12,888 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:09:12] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:09:13,137 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 14:09:13,138 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:09:13] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 14:09:54,752 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:09:54,754 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:09:54,825 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:09:56 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:09:56 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:09:56,706 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:09:56,732 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:09:56,738 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:10:05,215 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:10:05,216 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:10:05,277 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:10:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:10:06 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:10:06,696 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:10:06,715 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:10:06,721 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:10:15,199 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:10:15,200 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:10:15,267 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:10:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:10:16 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:10:16,685 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:10:16,704 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:10:16,711 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:10:20,991 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:10:20,992 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:10:21,053 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:10:22 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:10:22 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:10:22,472 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:10:22,491 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:10:22,498 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:10:26,787 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:10:26,789 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:10:26,852 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:10:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:10:28 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:10:28,385 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:10:28,406 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:10:28,413 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:10:35,843 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:10:35,844 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:10:35,909 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:10:37 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:10:37 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:10:37,334 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:10:37,354 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:10:37,361 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:17,930 - __main__ - INFO - Incoming request
+2025-07-12 14:13:17,931 - __main__ - INFO - Incoming request
+2025-07-12 14:13:17,932 - __main__ - INFO - Sample datasets listing started
+2025-07-12 14:13:17,932 - __main__ - INFO - File listing started
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:17,935 - __main__ - WARNING - Failed to process file in listing
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:17,951 - __main__ - INFO - File listing completed
+2025-07-12 14:13:17,952 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:13:17] "GET /api/uploaded-files HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:18,220 - __main__ - INFO - Sample datasets listing completed
+2025-07-12 14:13:18,221 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:13:18] "GET /api/sample-datasets HTTP/1.1" 200 -
+2025-07-12 14:13:24,182 - __main__ - INFO - Incoming request
+2025-07-12 14:13:24,182 - __main__ - INFO - File load started
+2025-07-12 14:13:24,182 - __main__ - INFO - Loading CSV file
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:24,184 - __main__ - INFO - CSV file loaded
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:24,186 - __main__ - INFO - Complexity analysis completed
+2025-07-12 14:13:24,186 - __main__ - INFO - File load completed successfully
+2025-07-12 14:13:24,189 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:13:24] "GET /api/load-uploaded-file/20250711_151008_leads_normalized.csv HTTP/1.1" 200 -
+/Users/root1/Downloads/cs/personal/db/backend/app.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:13:25,224 - __main__ - INFO - Incoming request
+2025-07-12 14:13:25,224 - __main__ - INFO - Query complexity analysis started
+2025-07-12 14:13:25,224 - __main__ - INFO - Analyzing query complexity
+2025-07-12 14:13:25,228 - __main__ - INFO - Query complexity analysis completed
+2025-07-12 14:13:25,228 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:13:25] "POST /api/analyze-query-complexity HTTP/1.1" 200 -
+2025-07-12 14:13:27,187 - __main__ - INFO - Incoming request
+2025-07-12 14:13:27,188 - __main__ - INFO - SQL query execution started
+2025-07-12 14:13:27,189 - __main__ - ERROR - SQL query execution failed
+2025-07-12 14:13:27,189 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2025 14:13:27] "[35m[1mPOST /api/sql-query HTTP/1.1[0m" 500 -
+2025-07-12 14:37:52,762 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:37:52,765 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:37:52,835 - werkzeug - INFO -  * Restarting with stat
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.apache.hadoop.util.NativeCodeLoader in an unnamed module (file:/opt/homebrew/lib/python3.13/site-packages/pyspark/jars/hadoop-client-api-3.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+25/07/12 14:37:54 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/07/12 14:37:54 WARN SparkContext: Another SparkContext is being constructed (or threw an exception in its constructor). This may indicate an error, since only one SparkContext should be running in this JVM (see SPARK-2243). The other SparkContext was created at:
+org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+py4j.Gateway.invoke(Gateway.java:238)
+py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+java.base/java.lang.Thread.run(Thread.java:1447)
+/Users/root1/Downloads/cs/personal/db/backend/app.py:91: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  timestamp = datetime.utcnow().isoformat()
+2025-07-12 14:37:54,508 - __main__ - INFO - Starting Flask API server
+2025-07-12 14:37:54,529 - werkzeug - WARNING -  * Debugger is active!
+2025-07-12 14:37:54,535 - werkzeug - INFO -  * Debugger PIN: 471-144-725
+2025-07-12 14:37:59,864 - werkzeug - INFO -  * Detected change in '/Users/root1/Downloads/cs/personal/db/backend/app.py', reloading
+Failed to create Spark session with local cluster, trying local mode: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Failed to create Spark session: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.UnsupportedOperationException: getSubject is not supported
+	at java.base/javax.security.auth.Subject.getSubject(Subject.java:277)
+	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:588)
+	at org.apache.spark.util.Utils$.$anonfun$getCurrentUserName$1(Utils.scala:2446)
+	at scala.Option.getOrElse(Option.scala:201)
+	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2446)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:339)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:59)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Falling back to pandas-only mode...
+2025-07-12 14:37:59,865 - py4j.clientserver - INFO - Closing down clientserver connection
+2025-07-12 14:37:59,933 - werkzeug - INFO -  * Restarting with stat
+Traceback (most recent call last):
+  File "/Users/root1/Downloads/cs/personal/db/backend/app.py", line 27, in <module>
+    console_handler.setFormatter(EnhancedConsoleFormatter())
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'EnhancedConsoleFormatter' is not defined
+2025-07-12 14:38:00,339 - py4j.clientserver - INFO - Closing down clientserver connection

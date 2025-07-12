@@ -1,0 +1,100 @@
+/* Blueprint.js CSS */
+@import "@blueprintjs/core/lib/css/blueprint.css";
+@import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import "@blueprintjs/select/lib/css/blueprint-select.css";
+@import "@blueprintjs/table/lib/css/table.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Custom responsive grid improvements */
+@media (max-width: 1200px) {
+  .main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .sidebar-sticky {
+    position: static !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 12px !important;
+  }
+  
+  .card-container {
+    padding: 16px !important;
+  }
+  
+  .navbar-heading h1 {
+    font-size: 18px !important;
+  }
+  
+  .sample-queries-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Improve table responsiveness on mobile */
+  .results-table-container {
+    font-size: 10px !important;
+  }
+  
+  .results-table-container th,
+  .results-table-container td {
+    padding: 6px 8px !important;
+    min-width: 80px !important;
+    max-width: 120px !important;
+  }
+  
+  /* Dataset preview mobile adjustments */
+  .dataset-preview-grid {
+    grid-template-columns: repeat(3, minmax(50px, 1fr)) !important;
+    gap: 2px !important;
+    font-size: 9px !important;
+  }
+  
+  .dataset-preview-cell {
+    padding: 2px 3px !important;
+    max-width: 60px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 8px !important;
+  }
+  
+  .card-container {
+    padding: 12px !important;
+  }
+  
+  /* Ultra-compact mobile view */
+  .dataset-preview-grid {
+    grid-template-columns: repeat(2, minmax(40px, 1fr)) !important;
+  }
+  
+  .navbar-group-right {
+    display: none !important;
+  }
+}
