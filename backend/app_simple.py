@@ -517,5 +517,73 @@ def delete_uploaded_file(filename):
             "error": str(e)
         }), 500
 
+# Global error handlers
+@app.errorhandler(404)
+def handle_404(error):
+    return jsonify({
+        'success': False,
+        'error': 'API endpoint not found',
+        'message': 'The requested API endpoint does not exist. Please check the URL and try again.',
+        'details': {
+            'requested_url': request.url,
+            'method': request.method,
+            'available_endpoints': [
+                '/api/health',
+                '/api/sql-query',
+                '/api/analyze-query-complexity',
+                '/api/analyze-csv-complexity',
+                '/api/sample-datasets',
+                '/api/upload-csv',
+                '/api/uploaded-files'
+            ]
+        }
+    }), 404
+
+@app.errorhandler(405)
+def handle_405(error):
+    return jsonify({
+        'success': False,
+        'error': 'Method not allowed',
+        'message': f'HTTP method {request.method} not allowed for this endpoint.',
+        'details': {
+            'requested_method': request.method,
+            'requested_url': request.url
+        }
+    }), 405
+
+@app.errorhandler(500)
+def handle_500(error):
+    error_id = str(int(time.time() * 1000))
+    logger.error(f"Internal server error: {error}", extra={
+        'operation': 'global_error_handler',
+        'error_type': type(error).__name__,
+        'error_id': error_id,
+        'url': request.url,
+        'method': request.method
+    })
+    return jsonify({
+        'success': False,
+        'error': 'Internal server error',
+        'message': 'An internal server error occurred. Please try again later.',
+        'details': {
+            'error_id': error_id,
+            'timestamp': datetime.now().isoformat()
+        }
+    }), 500
+
+# Catch-all route for undefined API endpoints
+@app.route('/api/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
+def catch_all_api(path):
+    return jsonify({
+        'success': False,
+        'error': 'API endpoint not found',
+        'message': f"API endpoint '/api/{path}' not found.",
+        'details': {
+            'requested_path': f'/api/{path}',
+            'method': request.method,
+            'suggestion': 'Check API documentation for available endpoints'
+        }
+    }), 404
+
 if __name__ == '__main__':
     app.run(debug=True, port=5002)

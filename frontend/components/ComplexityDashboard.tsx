@@ -15,6 +15,7 @@ import {
   Icon
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
+import ComplexityQA from './ComplexityQA';
 
 interface ComplexityDashboardProps {
   analysis: any;
@@ -253,6 +254,68 @@ export default function ComplexityDashboard({ analysis }: ComplexityDashboardPro
           </div>
         )}
 
+        {/* Complexity Explanations */}
+        <div style={{ marginBottom: '20px' }}>
+          <H5 style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+            <Icon icon={IconNames.HELP} size={16} style={{ marginRight: '10px' }} />
+            Understanding Complexity Metrics
+          </H5>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Callout intent={Intent.NONE} icon={IconNames.FLASH}>
+              <div>
+                <Text style={{ fontWeight: 'bold' }}>Compute Score (1-10):</Text>
+                <Text> Measures processing complexity based on operations like JOINs, subqueries, and aggregations. Higher scores indicate more CPU-intensive queries.</Text>
+                <br />
+                <Text style={{ fontSize: '12px', fontStyle: 'italic' }}>
+                  Ask: "Why is my compute score high?" or "How can I reduce compute complexity?"
+                </Text>
+              </div>
+            </Callout>
+            
+            <Callout intent={Intent.NONE} icon={IconNames.DATABASE}>
+              <div>
+                <Text style={{ fontWeight: 'bold' }}>Memory Score (1-10):</Text>
+                <Text> Estimates memory requirements based on data size and operations. Higher scores suggest the query may need significant RAM.</Text>
+                <br />
+                <Text style={{ fontSize: '12px', fontStyle: 'italic' }}>
+                  Ask: "What affects memory usage?" or "How to optimize memory consumption?"
+                </Text>
+              </div>
+            </Callout>
+            
+            <Callout intent={Intent.NONE} icon={IconNames.TIME}>
+              <div>
+                <Text style={{ fontWeight: 'bold' }}>Execution Time:</Text>
+                <Text> Predicted time based on data size and query complexity. Actual times may vary based on hardware and data distribution.</Text>
+                <br />
+                <Text style={{ fontSize: '12px', fontStyle: 'italic' }}>
+                  Ask: "Why is my query slow?" or "How accurate are time estimates?"
+                </Text>
+              </div>
+            </Callout>
+            
+            <Callout intent={Intent.NONE} icon={IconNames.DIAGRAM_TREE}>
+              <div>
+                <Text style={{ fontWeight: 'bold' }}>Query Components:</Text>
+                <Text> Breaking down your query shows which parts contribute most to complexity - JOINs, subqueries, window functions, etc.</Text>
+                <br />
+                <Text style={{ fontSize: '12px', fontStyle: 'italic' }}>
+                  Ask: "What are window functions?" or "When should I use subqueries vs JOINs?"
+                </Text>
+              </div>
+            </Callout>
+          </div>
+        </div>
+
+        {/* Interactive AI Q&A Section */}
+        <div style={{ marginBottom: '20px' }}>
+          <H5 style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+            <Icon icon={IconNames.CHAT} size={16} style={{ marginRight: '10px' }} />
+            Ask AI About Your Analysis
+          </H5>
+          <ComplexityQA analysis={analysis} />
+        </div>
+
         {/* Optimization Suggestions */}
         {analysis.optimization_suggestions && analysis.optimization_suggestions.length > 0 && (
           <div>
@@ -268,6 +331,10 @@ export default function ComplexityDashboard({ analysis }: ComplexityDashboardPro
                   icon={IconNames.LIGHTBULB}
                 >
                   <Text>{suggestion}</Text>
+                  <br />
+                  <Text style={{ fontSize: '12px', fontStyle: 'italic', marginTop: '5px' }}>
+                    Ask: "Can you explain this suggestion in more detail?"
+                  </Text>
                 </Callout>
               ))}
             </div>

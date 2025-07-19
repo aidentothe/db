@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { 
   Button, 
   Card, 
@@ -14,8 +14,7 @@ import {
   Classes,
   Tag,
   ButtonGroup,
-  Icon,
-  HTMLTable
+  Icon
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 import { Table2, Column, Cell, TableLoadingOption } from '@blueprintjs/table';
@@ -27,7 +26,66 @@ interface ResultsViewerProps {
 export default function ResultsViewer({ results }: ResultsViewerProps) {
   const [viewMode, setViewMode] = useState<'table' | 'json'>('table');
 
-  if (!results || !results.results || results.results.length === 0) {
+  const { data, columns } = useMemo(() => {
+    if (!results || !results.results) {
+      return { data: [], columns: [] };
+    }
+
+    // Handle array of objects with CSV-like structure
+    if (Array.isArray(results.results) && results.results.length > 0) {
+      const firstItem = results.results[0];
+      const keys = Object.keys(firstItem);
+      
+      // Check if this is the CSV format where header is the key and row is the value
+      if (keys.length === 1 && keys[0].includes(',')) {
+        const headerKey = keys[0];
+        
+        // Parse headers from the key
+        const headers = headerKey.split(',').map(h => h.trim());
+        
+        // Parse each row
+        const rows = results.results.map((item: any) => {
+          const rowValue = item[headerKey];
+          
+          // Simple CSV parsing - split by comma but handle quoted values
+          const values: string[] = [];
+          let current = '';
+          let inQuotes = false;
+          
+          for (let i = 0; i < rowValue.length; i++) {
+            const char = rowValue[i];
+            if (char === '"') {
+              inQuotes = !inQuotes;
+              current += char;
+            } else if (char === ',' && !inQuotes) {
+              values.push(current.trim());
+              current = '';
+            } else {
+              current += char;
+            }
+          }
+          values.push(current.trim());
+          
+          const row: any = {};
+          headers.forEach((header, headerIndex) => {
+            row[header] = values[headerIndex] || '';
+          });
+          
+          return row;
+        });
+        
+        return { data: rows, columns: headers };
+      }
+      
+      // Standard object array format
+      return { data: results.results, columns: keys };
+    }
+
+    return { data: [], columns: [] };
+  }, [results]);
+
+
+  if (!results || (!data || data.length === 0)) {
     return (
       <Card elevation={Elevation.TWO} style={{ 
         padding: '48px', 
@@ -55,8 +113,6 @@ export default function ResultsViewer({ results }: ResultsViewerProps) {
     );
   }
 
-  const data = results.results;
-  const columns = data.length > 0 ? Object.keys(data[0]) : [];
 
   const downloadCSV = () => {
     if (!data.length) return;
@@ -198,99 +254,29 @@ export default function ResultsViewer({ results }: ResultsViewerProps) {
             marginBottom: '24px',
             borderRadius: '6px',
             border: '1px solid #5C7080',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            height: '500px'
           }}>
-            <div className="results-table-container" style={{ 
-              overflowX: 'auto',
-              maxHeight: '500px',
-              overflowY: 'auto'
-            }}>
-              <HTMLTable 
-                bordered 
-                striped 
-                style={{ 
-                  width: '100%',
-                  backgroundColor: '#30404D',
-                  margin: 0,
-                  minWidth: `${Math.max(columns.length * 120, 600)}px`
-                }}
-              >
-                <thead>
-                  <tr style={{ backgroundColor: '#2F3F4C' }}>
-                    {columns.map((column, idx) => (
-                      <th 
-                        key={idx} 
-                        style={{ 
-                          padding: '10px 12px',
-                          color: '#F5F8FA',
-                          fontWeight: '600',
-                          fontSize: '12px',
-                          borderBottom: '2px solid #5C7080',
-                          position: 'sticky',
-                          top: 0,
-                          backgroundColor: '#2F3F4C',
-                          minWidth: '100px',
-                          maxWidth: '200px',
-                          zIndex: 10
-                        }}
-                      >
-                        <div style={{ 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          gap: '4px',
-                          overflow: 'hidden'
-                        }}>
-                          <span style={{ flexShrink: 0, fontSize: '10px' }}>
-                            {getTypeIcon(getColumnType(column))}
-                          </span>
-                          <span style={{ 
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap'
-                          }}>
-                            {column.length > 15 ? column.substring(0, 12) + '...' : column}
-                          </span>
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.slice(0, 100).map((row: any, rowIdx: number) => (
-                    <tr 
-                      key={rowIdx}
-                      style={{ 
-                        backgroundColor: rowIdx % 2 === 0 ? '#30404D' : '#34454F',
-                        transition: 'background-color 0.1s ease'
-                      }}
-                    >
-                      {columns.map((column, colIdx) => (
-                        <td 
-                          key={colIdx}
-                          style={{ 
-                            padding: '8px 12px',
-                            color: '#CED9E0',
-                            fontSize: '11px',
-                            borderBottom: '1px solid #5C7080',
-                            minWidth: '100px',
-                            maxWidth: '200px',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap'
-                          }}
-                          title={String(row[column])}
-                        >
-                          {(() => {
-                            const value = formatValue(row[column]);
-                            return String(value).length > 20 ? String(value).substring(0, 17) + '...' : value;
-                          })()}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </HTMLTable>
-            </div>
+            <Table2
+              numRows={data.length}
+              enableRowHeader={false}
+              enableColumnHeader={true}
+              enableMultipleSelection={false}
+              enableGhostCells={false}
+              enableFocusedCell={true}
+            >
+              {columns.map((column, index) => (
+                <Column
+                  key={index}
+                  name={column}
+                  cellRenderer={(rowIndex: number) => (
+                    <Cell>
+                      {data[rowIndex] ? formatValue(data[rowIndex][column]) : ''}
+                    </Cell>
+                  )}
+                />
+              ))}
+            </Table2>
           </div>
         ) : (
           <Card elevation={Elevation.ONE} style={{ 
@@ -302,6 +288,9 @@ export default function ResultsViewer({ results }: ResultsViewerProps) {
             border: '1px solid #5C7080',
             borderRadius: '6px'
           }}>
+            <div style={{ marginBottom: '10px', fontSize: '11px', color: '#8A9BA8' }}>
+              Parsed Data ({data.length} rows, {columns.length} columns)
+            </div>
             <pre className={Classes.CODE_BLOCK} style={{ 
               color: '#CED9E0',
               fontSize: '12px',
@@ -318,9 +307,9 @@ export default function ResultsViewer({ results }: ResultsViewerProps) {
         <div style={{ paddingTop: '20px', borderTop: '1px solid #5C7080' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Text className={Classes.TEXT_MUTED} style={{ fontSize: '12px' }}>
-              Showing {Math.min(data.length, 100)} of {results.row_count} rows
-              {data.length >= 100 && (
-                <span style={{ color: '#FF7373', fontWeight: '500' }}> (limited to 100 for display)</span>
+              Showing {Math.min(data.length, 1000)} of {results.row_count || data.length} rows
+              {data.length >= 1000 && (
+                <span style={{ color: '#FF7373', fontWeight: '500' }}> (limited to 1000 for display)</span>
               )}
             </Text>
             <Text className={Classes.TEXT_MUTED} style={{ fontSize: '12px' }}>

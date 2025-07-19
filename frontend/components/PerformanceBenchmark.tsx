@@ -78,6 +78,15 @@ export default function PerformanceBenchmark() {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
+
       const result = await response.json();
       
       if (result.success) {

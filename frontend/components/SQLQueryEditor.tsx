@@ -234,7 +234,7 @@ FROM data_table`,
     if (!query.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:5002/api/analyze-query-complexity', {
+      const response = await fetch('/api/analyze-query-complexity', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -244,6 +244,15 @@ FROM data_table`,
           data_stats: dataStats
         }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
 
       const result = await response.json();
       if (result.success) {
@@ -269,7 +278,7 @@ FROM data_table`,
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5002/api/sql-query', {
+      const response = await fetch('/api/sql-query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -280,6 +289,15 @@ FROM data_table`,
           analyze_complexity: true
         }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
 
       const result = await response.json();
       

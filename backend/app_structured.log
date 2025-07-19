@@ -188,3 +188,98 @@
   "message": "Starting Flask API server",
   "operation": "app_startup"
 }
+{
+  "timestamp": "2025-07-12T23:22:52.660142",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}
+{
+  "timestamp": "2025-07-12T23:22:52.698095",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5002\n * Running on http://192.168.86.41:5002"
+}
+{
+  "timestamp": "2025-07-12T23:22:52.698219",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"
+}
+{
+  "timestamp": "2025-07-12T23:22:52.698898",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat"
+}
+{
+  "timestamp": "2025-07-12T23:22:54.154368",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}
+{
+  "timestamp": "2025-07-12T23:22:54.174188",
+  "level": "WARNING",
+  "logger": "werkzeug",
+  "message": " * Debugger is active!"
+}
+{
+  "timestamp": "2025-07-12T23:22:54.181098",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Debugger PIN: 471-144-725"
+}
+{
+  "timestamp": "2025-07-12T23:37:29.402674",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}
+{
+  "timestamp": "2025-07-12T23:39:21.416840",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}
+{
+  "timestamp": "2025-07-12T23:39:21.449198",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5002\n * Running on http://192.168.86.41:5002"
+}
+{
+  "timestamp": "2025-07-12T23:39:21.449314",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"
+}
+{
+  "timestamp": "2025-07-12T23:39:21.449963",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Restarting with stat"
+}
+{
+  "timestamp": "2025-07-12T23:39:23.001979",
+  "level": "INFO",
+  "logger": "__main__",
+  "message": "Starting Flask API server",
+  "operation": "app_startup"
+}
+{
+  "timestamp": "2025-07-12T23:39:23.023047",
+  "level": "WARNING",
+  "logger": "werkzeug",
+  "message": " * Debugger is active!"
+}
+{
+  "timestamp": "2025-07-12T23:39:23.029917",
+  "level": "INFO",
+  "logger": "werkzeug",
+  "message": " * Debugger PIN: 471-144-725"
+}

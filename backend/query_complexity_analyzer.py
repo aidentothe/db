@@ -361,6 +361,241 @@ class QueryComplexityAnalyzer:
             
         return suggestions
 
+    def get_explanation(self, topic: str, context: Dict[str, Any] = None) -> str:
+        """
+        Provide detailed explanations for complexity analysis topics
+        
+        Args:
+            topic: The topic to explain (e.g., 'compute_score', 'memory_score', 'joins', etc.)
+            context: Optional context from current analysis for personalized explanations
+            
+        Returns:
+            Detailed explanation string
+        """
+        explanations = {
+            'compute_score': {
+                'title': 'Compute Score Explanation',
+                'description': """
+The compute score (1-10) measures how CPU-intensive your query is based on the operations it performs:
+
+**Score Factors:**
+• Each table adds +1 point
+• JOINs add +4 points each (more complex joins like FULL JOIN add more)
+• Subqueries add +4 points each
+• Aggregate functions (COUNT, SUM, etc.) add +3 points each
+• Window functions add +5 points each
+• DISTINCT operations add +2 points
+• GROUP BY and ORDER BY add points based on complexity
+
+**Score Ranges:**
+• 1-3: Simple query, minimal processing
+• 4-6: Moderate complexity, should run efficiently
+• 7-8: Complex query, may take longer
+• 9-10: Very complex, consider optimization
+
+**Common Causes of High Scores:**
+• Multiple JOINs between large tables
+• Nested subqueries
+• Complex window functions
+• Many aggregate operations
+                """,
+                'questions': [
+                    "Why is my compute score high?",
+                    "How can I reduce compute complexity?",
+                    "What operations are most expensive?"
+                ]
+            },
+            'memory_score': {
+                'title': 'Memory Score Explanation',
+                'description': """
+The memory score (1-10) estimates how much RAM your query will need:
+
+**Memory Usage Factors:**
+• Base data size (rows × columns × data type size)
+• JOIN operations multiply memory needs
+• GROUP BY requires temporary storage for grouping
+• Subqueries need separate memory for intermediate results
+• Window functions require partitioning data in memory
+• DISTINCT operations need deduplication storage
+
+**Score Categories:**
+• 1-2: Low memory (< 10MB)
+• 3-4: Medium memory (10-100MB)
+• 5-6: High memory (100MB-1GB)
+• 7-8: Very high memory (1-5GB)
+• 9-10: Extreme memory (> 5GB)
+
+**Optimization Tips:**
+• Add WHERE clauses to filter data early
+• Use LIMIT when testing
+• Consider indexed views for repeated complex queries
+• Break large queries into smaller parts
+                """,
+                'questions': [
+                    "What affects memory usage?",
+                    "How to optimize memory consumption?",
+                    "Why is my memory score high?"
+                ]
+            },
+            'joins': {
+                'title': 'JOIN Operations Explained',
+                'description': """
+JOINs combine data from multiple tables and significantly affect performance:
+
+**JOIN Types (by performance):**
+• INNER JOIN: Fastest, only matching rows
+• LEFT/RIGHT JOIN: Moderate, includes non-matching rows from one side
+• FULL OUTER JOIN: Slowest, includes all rows from both tables
+• CROSS JOIN: Very expensive, cartesian product
+
+**Performance Impact:**
+• Each JOIN roughly doubles processing time
+• Memory usage increases with result set size
+• JOIN order matters - smaller tables first
+• Proper indexing on JOIN columns is crucial
+
+**Optimization Strategies:**
+• Ensure JOIN columns are indexed
+• Filter data before JOINs when possible
+• Consider EXISTS instead of JOIN for existence checks
+• Use appropriate JOIN type for your use case
+• Avoid JOINs on calculated columns
+                """,
+                'questions': [
+                    "What's the difference between INNER and LEFT JOINs?",
+                    "How do JOINs affect performance?",
+                    "When should I use EXISTS instead of JOIN?"
+                ]
+            },
+            'subqueries': {
+                'title': 'Subqueries and Performance',
+                'description': """
+Subqueries are queries nested inside other queries:
+
+**Types of Subqueries:**
+• Scalar subqueries: Return single value
+• EXISTS subqueries: Check for existence
+• IN subqueries: Check membership in set
+• Correlated subqueries: Reference outer query
+
+**Performance Considerations:**
+• Correlated subqueries execute once per outer row (expensive)
+• Non-correlated subqueries execute once
+• Many subqueries can create complex execution plans
+• Some can be converted to JOINs for better performance
+
+**When to Use Subqueries vs JOINs:**
+• Use subqueries for existence checks (EXISTS)
+• Use JOINs when you need columns from both tables
+• CTEs can make complex subqueries more readable
+• Consider window functions for ranked/numbered results
+                """,
+                'questions': [
+                    "How do subqueries affect memory usage?",
+                    "When should I use subqueries vs JOINs?",
+                    "What are correlated subqueries?"
+                ]
+            },
+            'window_functions': {
+                'title': 'Window Functions Explained',
+                'description': """
+Window functions perform calculations across related rows:
+
+**Common Window Functions:**
+• ROW_NUMBER(): Sequential numbering
+• RANK()/DENSE_RANK(): Ranking with ties
+• LAG()/LEAD(): Access previous/next rows
+• SUM()/AVG() OVER: Running totals/averages
+• FIRST_VALUE()/LAST_VALUE(): First/last in partition
+
+**Performance Characteristics:**
+• Require sorting and partitioning data
+• Memory-intensive for large partitions
+• More efficient than self-JOINs for similar results
+• Can be optimized with proper indexing
+
+**Optimization Tips:**
+• Partition on indexed columns when possible
+• Limit partition sizes with WHERE clauses
+• Consider materializing results for repeated use
+• Use appropriate ORDER BY in window specification
+                """,
+                'questions': [
+                    "What are window functions?",
+                    "When should I use window functions?",
+                    "How do window functions affect performance?"
+                ]
+            },
+            'execution_time': {
+                'title': 'Execution Time Estimates',
+                'description': """
+Execution time estimates are based on query complexity and data size:
+
+**Estimation Factors:**
+• Base processing rate: ~50,000 rows/second
+• JOIN multipliers: Each JOIN roughly doubles time
+• Subquery overhead: 1.5x multiplier per subquery
+• Aggregate functions: 1.3x multiplier each
+• Window functions: 1.8x multiplier each
+
+**Accuracy Considerations:**
+• Estimates assume average hardware
+• Actual performance depends on:
+  - CPU speed and cores
+  - Available RAM
+  - Storage type (SSD vs HDD)
+  - Data distribution and indexing
+  - Database engine optimizations
+
+**Performance Categories:**
+• Fast: < 1 second
+• Medium: 1-10 seconds
+• Slow: 10-60 seconds
+• Very Slow: > 1 minute
+                """,
+                'questions': [
+                    "Why is my query slow?",
+                    "How accurate are time estimates?",
+                    "What factors affect execution time?"
+                ]
+            }
+        }
+        
+        if topic in explanations:
+            explanation = explanations[topic]
+            result = f"# {explanation['title']}\n\n{explanation['description']}\n\n"
+            if context:
+                result += self._add_contextual_info(topic, context)
+            result += f"\n**Related Questions You Can Ask:**\n"
+            for question in explanation['questions']:
+                result += f"• \"{question}\"\n"
+            return result
+        else:
+            return f"Topic '{topic}' not found. Available topics: {', '.join(explanations.keys())}"
+    
+    def _add_contextual_info(self, topic: str, context: Dict[str, Any]) -> str:
+        """Add contextual information based on current analysis"""
+        contextual_info = ""
+        
+        if topic == 'compute_score' and 'compute_score' in context:
+            score = context['compute_score']
+            contextual_info += f"\n**Your Query's Compute Score: {score}/10**\n"
+            if score > 7:
+                contextual_info += "Your query has a high compute score. "
+            elif score > 4:
+                contextual_info += "Your query has a moderate compute score. "
+            else:
+                contextual_info += "Your query has a low compute score. "
+                
+        if topic == 'joins' and 'components' in context:
+            joins = context['components'].get('joins', [])
+            if joins:
+                contextual_info += f"\n**Your Query Has {len(joins)} JOIN(s):**\n"
+                for join in joins:
+                    contextual_info += f"• {join}\n"
+                    
+        return contextual_info
+
     def analyze_csv_complexity(self, df: pd.DataFrame) -> Dict[str, Any]:
         """Analyze complexity of a CSV dataset"""
         # Convert data types to JSON-serializable format

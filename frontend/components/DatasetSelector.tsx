@@ -14,7 +14,10 @@ import {
   Classes,
   Tag,
   FileInput,
-  Callout
+  Callout,
+  Spinner,
+  NonIdealState,
+  Icon
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 import { logger } from '../utils/logger';
@@ -41,8 +44,10 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<string>('');
   const [uploadError, setUploadError] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'sample' | 'upload'>('sample');
+  const [activeTab, setActiveTab] = useState<'sample' | 'upload' | 's3'>('sample');
   const [dragOver, setDragOver] = useState(false);
+  const [s3Connected, setS3Connected] = useState(false);
+  const [s3Checking, setS3Checking] = useState(false);
 
   // Load sample datasets
   useEffect(() => {
@@ -54,6 +59,7 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
     
     loadSampleDatasets();
     loadUploadedFiles();
+    checkS3Connection();
   }, []);
 
   const loadSampleDatasets = async () => {
@@ -62,6 +68,16 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
     
     try {
       const response = await fetch('/api/sample-datasets');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
+
       const result = await response.json();
       const processingTime = timer();
       
@@ -94,6 +110,16 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
     
     try {
       const response = await fetch('/api/uploaded-files');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
+
       const result = await response.json();
       const processingTime = timer();
       
@@ -132,6 +158,16 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
       
       logger.logApiRequest(endpoint, 'GET');
       const response = await fetch(endpoint);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
+
       const result = await response.json();
       const processingTime = timer();
       
@@ -201,6 +237,11 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
       }
 
       setUploadProgress('Processing file...');
@@ -325,6 +366,19 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
     setDragOver(false);
   }, []);
 
+  const checkS3Connection = async () => {
+    setS3Checking(true);
+    try {
+      const response = await fetch('/api/s3/status');
+      const data = await response.json();
+      setS3Connected(data.connected || false);
+    } catch (error) {
+      setS3Connected(false);
+    } finally {
+      setS3Checking(false);
+    }
+  };
+
   const deleteUploadedFile = async (filename: string) => {
     if (!confirm('Are you sure you want to delete this file?')) return;
 
@@ -343,6 +397,15 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
       const response = await fetch(endpoint, {
         method: 'DELETE',
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
 
       const result = await response.json();
       const processingTime = timer();
@@ -606,7 +669,7 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
               previous_tab: activeTab,
               user_action: 'tab_navigation'
             });
-            setActiveTab(tabId as 'sample' | 'upload');
+            setActiveTab(tabId as 'sample' | 'upload' | 's3');
           }}
           style={{ marginBottom: '24px' }}
         >
@@ -625,6 +688,15 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span className={`bp5-icon bp5-icon-upload`} style={{ marginRight: '5px' }} />
                 Uploaded Files ({uploadedFiles.length})
+              </div>
+            }
+          />
+          <Tab
+            id="s3"
+            title={
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span className={`bp5-icon bp5-icon-cloud`} style={{ marginRight: '5px' }} />
+                AWS S3 Datasets
               </div>
             }
           />
@@ -729,6 +801,56 @@ export default function DatasetSelector({ onDataSelected }: DatasetSelectorProps
                   <DatasetCard key={dataset.filename} dataset={dataset} isUploaded={true} />
                 ))}
               </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 's3' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {s3Checking ? (
+              <div style={{ textAlign: 'center', padding: '48px 24px' }}>
+                <Spinner size={40} />
+                <Text style={{ marginTop: '16px', color: '#A7B6C2' }}>
+                  Checking AWS S3 connection...
+                </Text>
+              </div>
+            ) : !s3Connected ? (
+              <NonIdealState
+                icon={IconNames.CLOUD_OFFLINE}
+                title="AWS S3 Not Connected"
+                description="To access S3 datasets, you need to configure AWS credentials and connection settings."
+                action={
+                  <div style={{ marginTop: '24px' }}>
+                    <Callout intent={Intent.WARNING} icon={IconNames.WARNING_SIGN}>
+                      <H5>Connection Required</H5>
+                      <p>
+                        AWS S3 connection is not configured. To enable S3 dataset access:
+                      </p>
+                      <ol style={{ marginLeft: '20px', marginTop: '12px' }}>
+                        <li>Configure AWS credentials in your environment</li>
+                        <li>Set up the S3 bucket permissions</li>
+                        <li>Update the backend configuration with your S3 settings</li>
+                      </ol>
+                      <Button
+                        intent={Intent.PRIMARY}
+                        icon={IconNames.REFRESH}
+                        text="Retry Connection"
+                        onClick={checkS3Connection}
+                        style={{ marginTop: '16px' }}
+                      />
+                    </Callout>
+                  </div>
+                }
+              />
+            ) : (
+              <Text className={Classes.TEXT_MUTED} style={{ 
+                textAlign: 'center', 
+                padding: '48px 24px',
+                fontSize: '14px',
+                color: '#8A9BA8'
+              }}>
+                S3 datasets feature coming soon...
+              </Text>
             )}
           </div>
         )}

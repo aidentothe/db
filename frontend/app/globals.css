@@ -63,8 +63,8 @@ body {
   .results-table-container th,
   .results-table-container td {
     padding: 6px 8px !important;
-    min-width: 80px !important;
-    max-width: 120px !important;
+    min-width: 100px !important;
+    max-width: none !important;
   }
   
   /* Dataset preview mobile adjustments */

@@ -19,18 +19,31 @@ import {
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 
-// Import the new Spark demo components (will create these next)
+// Import the new Spark demo components
 import PerformanceBenchmark from '../../components/PerformanceBenchmark';
 import LargeDatasetGenerator from '../../components/LargeDatasetGenerator';
-import ETLPipelineViewer from '../../components/ETLPipelineViewer';
-import StreamingDashboard from '../../components/StreamingDashboard';
-import MLPipelineBuilder from '../../components/MLPipelineBuilder';
-import SparkLearningCenter from '../../components/SparkLearningCenter';
+import CatalystExplorer from '../../components/CatalystExplorer';
+import DeltaLakeDemo from '../../components/DeltaLakeDemo';
+import AWSS3Datasets from '../../components/AWSS3Datasets';
 
 export default function SparkDemo() {
   const [activeTab, setActiveTab] = useState<string>('overview');
 
   const sparkCapabilities = [
+    {
+      id: 'catalyst',
+      title: 'Catalyst Optimizer',
+      description: 'Deep dive into Spark\'s query optimizer with execution plan analysis',
+      icon: IconNames.LIGHTBULB,
+      color: '#FFB366'
+    },
+    {
+      id: 'delta-lake',
+      title: 'Delta Lake Operations',
+      description: 'ACID transactions, time travel, and schema evolution with Delta Lake',
+      icon: IconNames.DATABASE,
+      color: '#0F9960'
+    },
     {
       id: 'performance',
       title: 'Performance Comparison',
@@ -42,15 +55,8 @@ export default function SparkDemo() {
       id: 'large-datasets',
       title: 'Large Dataset Generation',
       description: 'Generate and process millions of rows with distributed computing',
-      icon: IconNames.DATABASE,
+      icon: IconNames.GRID_VIEW,
       color: '#29A634'
-    },
-    {
-      id: 'etl',
-      title: 'ETL Pipelines',
-      description: 'Complex data transformations with data quality monitoring',
-      icon: IconNames.FLOW_BRANCH,
-      color: '#D9822B'
     },
     {
       id: 'streaming',
@@ -60,18 +66,11 @@ export default function SparkDemo() {
       color: '#AD7BE9'
     },
     {
-      id: 'ml',
-      title: 'Machine Learning',
-      description: 'End-to-end ML pipelines with automated feature engineering',
-      icon: IconNames.PREDICTIVE_ANALYSIS,
-      color: '#C23030'
-    },
-    {
       id: 'learning',
       title: 'Learning Center',
       description: 'Interactive tutorials and best practices for Apache Spark',
       icon: IconNames.LEARNING,
-      color: '#0F9960'
+      color: '#D9822B'
     }
   ];
 
@@ -310,6 +309,26 @@ export default function SparkDemo() {
             panel={<OverviewPanel />}
           />
           <Tab
+            id="catalyst"
+            title={
+              <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
+                <Icon icon={IconNames.LIGHTBULB} style={{ marginRight: '8px' }} />
+                Catalyst Optimizer
+              </div>
+            }
+            panel={<CatalystExplorer />}
+          />
+          <Tab
+            id="delta-lake"
+            title={
+              <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
+                <Icon icon={IconNames.DATABASE} style={{ marginRight: '8px' }} />
+                Delta Lake
+              </div>
+            }
+            panel={<DeltaLakeDemo />}
+          />
+          <Tab
             id="performance"
             title={
               <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
@@ -323,21 +342,21 @@ export default function SparkDemo() {
             id="large-datasets"
             title={
               <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
-                <Icon icon={IconNames.DATABASE} style={{ marginRight: '8px' }} />
+                <Icon icon={IconNames.GRID_VIEW} style={{ marginRight: '8px' }} />
                 Large Datasets
               </div>
             }
             panel={<LargeDatasetGenerator />}
           />
           <Tab
-            id="etl"
+            id="aws-s3"
             title={
               <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
-                <Icon icon={IconNames.FLOW_BRANCH} style={{ marginRight: '8px' }} />
-                ETL Pipelines
+                <Icon icon={IconNames.CLOUD} style={{ marginRight: '8px' }} />
+                AWS S3 Datasets
               </div>
             }
-            panel={<ETLPipelineViewer />}
+            panel={<AWSS3Datasets />}
           />
           <Tab
             id="streaming"
@@ -347,17 +366,13 @@ export default function SparkDemo() {
                 Streaming
               </div>
             }
-            panel={<StreamingDashboard />}
-          />
-          <Tab
-            id="ml"
-            title={
-              <div style={{ display: 'flex', alignItems: 'center', padding: '8px 16px' }}>
-                <Icon icon={IconNames.PREDICTIVE_ANALYSIS} style={{ marginRight: '8px' }} />
-                Machine Learning
+            panel={
+              <div style={{ padding: '32px', textAlign: 'center' }}>
+                <Icon icon={IconNames.TIMELINE_EVENTS} size={48} style={{ color: '#AD7BE9', marginBottom: '16px' }} />
+                <h2 style={{ color: '#F5F8FA', marginBottom: '8px' }}>Streaming Demo</h2>
+                <Text style={{ color: '#A7B6C2' }}>Real-time stream processing demo coming soon...</Text>
               </div>
             }
-            panel={<MLPipelineBuilder />}
           />
           <Tab
             id="learning"
@@ -367,7 +382,13 @@ export default function SparkDemo() {
                 Learn
               </div>
             }
-            panel={<SparkLearningCenter />}
+            panel={
+              <div style={{ padding: '32px', textAlign: 'center' }}>
+                <Icon icon={IconNames.LEARNING} size={48} style={{ color: '#D9822B', marginBottom: '16px' }} />
+                <h2 style={{ color: '#F5F8FA', marginBottom: '8px' }}>Learning Center</h2>
+                <Text style={{ color: '#A7B6C2' }}>Interactive Spark tutorials coming soon...</Text>
+              </div>
+            }
           />
         </Tabs>
       </div>

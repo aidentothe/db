@@ -76,6 +76,15 @@ export default function LargeDatasetGenerator() {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response. Make sure the backend is running.');
+      }
+
       const result = await response.json();
       
       if (result.success) {
@@ -180,6 +189,7 @@ export default function LargeDatasetGenerator() {
                 stepSize={10000}
                 fill={true}
                 majorStepSize={100000}
+                id="numRows-input"
               />
             </FormGroup>
 
@@ -194,6 +204,7 @@ export default function LargeDatasetGenerator() {
                 max={16}
                 stepSize={1}
                 fill={true}
+                id="partitions-input"
               />
             </FormGroup>
 

@@ -9,8 +9,9 @@ import os
 import logging
 import time
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta
 from query_complexity_analyzer import QueryComplexityAnalyzer
+from groq_client import GroqClient
 
 app = Flask(__name__)
 # Configure CORS to allow frontend requests
@@ -206,6 +207,12 @@ import sys
 
 # Try to create Spark session with fallback configuration
 try:
+    # Set environment variables for Java compatibility
+    os.environ['PYSPARK_PYTHON'] = sys.executable
+    os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+    # Fix for newer Java versions compatibility
+    os.environ['HADOOP_USER_NAME'] = 'spark'
+    
     spark = SparkSession.builder \
         .appName("SparkNextJSPOC") \
         .master("local[*]") \
@@ -215,6 +222,9 @@ try:
         .config("spark.driver.bindAddress", "127.0.0.1") \
         .config("spark.driver.host", "127.0.0.1") \
         .config("spark.ui.enabled", "false") \
+        .config("spark.sql.execution.arrow.pyspark.enabled", "false") \
+        .config("spark.sql.adaptive.enabled", "false") \
+        .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
         .getOrCreate()
 except Exception as e:
     print(f"Failed to create Spark session with local cluster, trying local mode: {e}")
@@ -225,6 +235,9 @@ except Exception as e:
             .config("spark.driver.memory", "512m") \
             .config("spark.sql.warehouse.dir", "/tmp/spark-warehouse") \
             .config("spark.ui.enabled", "false") \
+            .config("spark.sql.execution.arrow.pyspark.enabled", "false") \
+            .config("spark.sql.adaptive.enabled", "false") \
+            .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
             .getOrCreate()
     except Exception as e2:
         print(f"Failed to create Spark session: {e2}")
@@ -237,6 +250,7 @@ if spark:
 
 # Initialize complexity analyzer
 complexity_analyzer = QueryComplexityAnalyzer()
+groq_client = GroqClient()
 
 # Log all incoming requests
 @app.before_request
@@ -776,6 +790,290 @@ def analyze_query_complexity():
         logger.error("Query complexity analysis failed", extra={
             'operation': 'query_complexity_analysis_failed',
             'analysis_id': analysis_id,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/explain-complexity', methods=['POST'])
+def explain_complexity_topic():
+    """Provide detailed explanations for complexity analysis topics"""
+    start_time = time.time()
+    explanation_id = f"explanation_{int(time.time() * 1000)}"
+    
+    logger.info("Complexity explanation started", extra={
+        'operation': 'complexity_explanation_start',
+        'explanation_id': explanation_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        data = request.json
+        topic = data.get('topic', '')
+        context = data.get('context', None)  # Optional analysis context
+        
+        if not topic:
+            logger.warning("Complexity explanation failed: No topic provided", extra={
+                'operation': 'complexity_explanation_failed',
+                'explanation_id': explanation_id,
+                'error_type': 'no_topic_provided'
+            })
+            return jsonify({
+                "success": False,
+                "error": "Topic is required"
+            }), 400
+        
+        logger.info("Generating complexity explanation", extra={
+            'operation': 'complexity_explanation_process',
+            'explanation_id': explanation_id,
+            'topic': topic,
+            'has_context': context is not None
+        })
+        
+        # Generate explanation
+        explanation_start = time.time()
+        explanation = complexity_analyzer.get_explanation(topic, context)
+        explanation_time = time.time() - explanation_start
+        
+        total_time = time.time() - start_time
+        logger.info("Complexity explanation completed", extra={
+            'operation': 'complexity_explanation_complete',
+            'explanation_id': explanation_id,
+            'topic': topic,
+            'explanation_time': explanation_time,
+            'total_time': total_time
+        })
+        
+        return jsonify({
+            "success": True,
+            "topic": topic,
+            "explanation": explanation
+        })
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Complexity explanation failed", extra={
+            'operation': 'complexity_explanation_failed',
+            'explanation_id': explanation_id,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/ask-complexity-question', methods=['POST'])
+def ask_complexity_question():
+    """Answer user questions about complexity analysis using Groq AI"""
+    start_time = time.time()
+    question_id = f"question_{int(time.time() * 1000)}"
+    
+    logger.info("Complexity question started", extra={
+        'operation': 'complexity_question_start',
+        'question_id': question_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        data = request.json
+        question = data.get('question', '')
+        analysis_context = data.get('analysis_context', None)
+        
+        if not question:
+            logger.warning("Complexity question failed: No question provided", extra={
+                'operation': 'complexity_question_failed',
+                'question_id': question_id,
+                'error_type': 'no_question_provided'
+            })
+            return jsonify({
+                "success": False,
+                "error": "Question is required"
+            }), 400
+        
+        logger.info("Processing complexity question", extra={
+            'operation': 'complexity_question_process',
+            'question_id': question_id,
+            'question_length': len(question),
+            'has_context': analysis_context is not None
+        })
+        
+        # Get answer from Groq
+        answer_start = time.time()
+        answer = groq_client.ask_complexity_question(question, analysis_context)
+        answer_time = time.time() - answer_start
+        
+        total_time = time.time() - start_time
+        logger.info("Complexity question completed", extra={
+            'operation': 'complexity_question_complete',
+            'question_id': question_id,
+            'answer_length': len(answer),
+            'answer_time': answer_time,
+            'total_time': total_time
+        })
+        
+        return jsonify({
+            "success": True,
+            "question": question,
+            "answer": answer,
+            "response_time": answer_time
+        })
+        
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Complexity question failed", extra={
+            'operation': 'complexity_question_failed',
+            'question_id': question_id,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/optimize-query', methods=['POST'])
+def optimize_query():
+    """Generate detailed optimization suggestions for a query using Groq AI"""
+    start_time = time.time()
+    optimization_id = f"optimization_{int(time.time() * 1000)}"
+    
+    logger.info("Query optimization started", extra={
+        'operation': 'query_optimization_start',
+        'optimization_id': optimization_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        data = request.json
+        query = data.get('query', '')
+        analysis = data.get('analysis', {})
+        
+        if not query:
+            logger.warning("Query optimization failed: No query provided", extra={
+                'operation': 'query_optimization_failed',
+                'optimization_id': optimization_id,
+                'error_type': 'no_query_provided'
+            })
+            return jsonify({
+                "success": False,
+                "error": "Query is required"
+            }), 400
+        
+        logger.info("Generating optimization suggestions", extra={
+            'operation': 'query_optimization_process',
+            'optimization_id': optimization_id,
+            'query_length': len(query),
+            'has_analysis': bool(analysis)
+        })
+        
+        # Generate optimization suggestions using Groq
+        optimization_start = time.time()
+        suggestions = groq_client.generate_optimization_suggestions(query, analysis)
+        optimization_time = time.time() - optimization_start
+        
+        total_time = time.time() - start_time
+        logger.info("Query optimization completed", extra={
+            'operation': 'query_optimization_complete',
+            'optimization_id': optimization_id,
+            'suggestions_length': len(suggestions),
+            'optimization_time': optimization_time,
+            'total_time': total_time
+        })
+        
+        return jsonify({
+            "success": True,
+            "query": query,
+            "optimization_suggestions": suggestions,
+            "response_time": optimization_time
+        })
+        
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Query optimization failed", extra={
+            'operation': 'query_optimization_failed',
+            'optimization_id': optimization_id,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/explain-score', methods=['POST'])
+def explain_complexity_score():
+    """Explain why a query received its complexity score using Groq AI"""
+    start_time = time.time()
+    explanation_id = f"score_explanation_{int(time.time() * 1000)}"
+    
+    logger.info("Score explanation started", extra={
+        'operation': 'score_explanation_start',
+        'explanation_id': explanation_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        data = request.json
+        analysis = data.get('analysis', {})
+        
+        if not analysis:
+            logger.warning("Score explanation failed: No analysis provided", extra={
+                'operation': 'score_explanation_failed',
+                'explanation_id': explanation_id,
+                'error_type': 'no_analysis_provided'
+            })
+            return jsonify({
+                "success": False,
+                "error": "Analysis results are required"
+            }), 400
+        
+        logger.info("Generating score explanation", extra={
+            'operation': 'score_explanation_process',
+            'explanation_id': explanation_id,
+            'complexity_rating': analysis.get('complexity_rating', 'unknown')
+        })
+        
+        # Generate explanation using Groq
+        explanation_start = time.time()
+        explanation = groq_client.explain_complexity_score(analysis)
+        explanation_time = time.time() - explanation_start
+        
+        total_time = time.time() - start_time
+        logger.info("Score explanation completed", extra={
+            'operation': 'score_explanation_complete',
+            'explanation_id': explanation_id,
+            'explanation_length': len(explanation),
+            'explanation_time': explanation_time,
+            'total_time': total_time
+        })
+        
+        return jsonify({
+            "success": True,
+            "analysis": analysis,
+            "explanation": explanation,
+            "response_time": explanation_time
+        })
+        
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Score explanation failed", extra={
+            'operation': 'score_explanation_failed',
+            'explanation_id': explanation_id,
             'error_type': type(e).__name__,
             'error_message': str(e),
             'processing_time': total_time,
@@ -1937,7 +2235,7 @@ def complex_etl():
     
     try:
         from pyspark.sql.functions import when, isnan, isnull, col, regexp_replace, split, explode
-        from pyspark.sql.types import *
+        from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, TimestampType
         
         data = request.json
         source_type = data.get('source_type', 'sales_data')
@@ -2574,6 +2872,738 @@ def advanced_ml_pipeline():
             "success": False,
             "error": str(e)
         }), 500
+
+@app.route('/api/catalyst-explain', methods=['POST'])
+def catalyst_explain():
+    """Show detailed Catalyst optimizer execution plans and rule applications"""
+    start_time = time.time()
+    explain_id = f"explain_{int(time.time() * 1000)}"
+    
+    logger.info("Catalyst explanation started", extra={
+        'operation': 'catalyst_explain_start',
+        'explain_id': explain_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        # Check if Spark is available - if not, provide mock analysis
+        if spark is None:
+            logger.warning("Spark not available, providing mock Catalyst analysis", extra={
+                'operation': 'mock_catalyst_analysis',
+                'explain_id': explain_id
+            })
+            
+            # Generate mock analysis for demonstration
+            mock_analysis = generate_mock_catalyst_analysis(query, len(dataset_data) if dataset_data else 0)
+            
+            total_time = time.time() - start_time
+            logger.info("Mock Catalyst explanation completed", extra={
+                'operation': 'mock_catalyst_explain_complete',
+                'explain_id': explain_id,
+                'processing_time': total_time
+            })
+            
+            return jsonify(mock_analysis)
+        
+        data = request.json
+        query = data.get('query', '')
+        dataset_data = data.get('data', [])
+        
+        if not query.strip():
+            return jsonify({
+                "success": False,
+                "error": "Query is required"
+            }), 400
+        
+        logger.info("Creating DataFrame for Catalyst analysis", extra={
+            'operation': 'catalyst_dataframe_creation',
+            'explain_id': explain_id,
+            'query_length': len(query),
+            'data_rows': len(dataset_data)
+        })
+        
+        # Create DataFrame from data
+        if dataset_data:
+            df = spark.createDataFrame(dataset_data)
+            df.createOrReplaceTempView("data_table")
+        
+        # Get detailed execution plan
+        sql_df = spark.sql(query)
+        
+        # Get different plan representations
+        plan_analysis = {}
+        
+        # 1. Logical Plan (parsed)
+        try:
+            logical_plan = sql_df._jdf.logicalPlan().toString()
+            plan_analysis['logical_plan'] = parse_logical_plan(logical_plan)
+        except Exception as e:
+            plan_analysis['logical_plan'] = f"Error getting logical plan: {str(e)}"
+        
+        # 2. Optimized Logical Plan
+        try:
+            optimized_plan = sql_df._jdf.queryExecution().optimizedPlan().toString()
+            plan_analysis['optimized_plan'] = parse_optimized_plan(optimized_plan)
+        except Exception as e:
+            plan_analysis['optimized_plan'] = f"Error getting optimized plan: {str(e)}"
+        
+        # 3. Physical Plan
+        try:
+            physical_plan = sql_df._jdf.queryExecution().executedPlan().toString()
+            plan_analysis['physical_plan'] = parse_physical_plan(physical_plan)
+        except Exception as e:
+            plan_analysis['physical_plan'] = f"Error getting physical plan: {str(e)}"
+        
+        # 4. Get explain output
+        import io
+        import sys
+        
+        # Capture explain output
+        old_stdout = sys.stdout
+        sys.stdout = captured_output = io.StringIO()
+        try:
+            sql_df.explain('extended')
+            explain_output = captured_output.getvalue()
+        finally:
+            sys.stdout = old_stdout
+        
+        # 5. Analyze optimization opportunities
+        optimization_analysis = analyze_query_optimizations(query, dataset_data)
+        
+        # 6. Simulate Catalyst rules applied
+        catalyst_rules = [
+            {
+                'rule_name': 'ConstantFolding',
+                'description': 'Replaces expressions that can be statically evaluated with their results',
+                'applied': 'WHERE 1=1' in query.upper() or 'WHERE 2>1' in query.upper(),
+                'impact': 'Eliminates unnecessary condition evaluation'
+            },
+            {
+                'rule_name': 'PredicatePushdown',
+                'description': 'Pushes filter conditions down to data sources',
+                'applied': 'WHERE' in query.upper(),
+                'impact': 'Reduces data read from source by early filtering'
+            },
+            {
+                'rule_name': 'ColumnPruning',
+                'description': 'Eliminates unused columns from query execution',
+                'applied': 'SELECT *' not in query.upper(),
+                'impact': 'Reduces memory usage and I/O'
+            },
+            {
+                'rule_name': 'ProjectionCollapsing',
+                'description': 'Combines adjacent projection operations',
+                'applied': query.upper().count('SELECT') == 1,
+                'impact': 'Reduces intermediate data materialization'
+            },
+            {
+                'rule_name': 'BooleanSimplification',
+                'description': 'Simplifies boolean expressions',
+                'applied': 'AND' in query.upper() or 'OR' in query.upper(),
+                'impact': 'Faster boolean expression evaluation'
+            }
+        ]
+        
+        # 7. Performance estimation
+        performance_estimation = estimate_query_performance(query, len(dataset_data) if dataset_data else 0)
+        
+        total_time = time.time() - start_time
+        logger.info("Catalyst explanation completed", extra={
+            'operation': 'catalyst_explain_complete',
+            'explain_id': explain_id,
+            'processing_time': total_time
+        })
+        
+        return jsonify({
+            "success": True,
+            "plan_analysis": plan_analysis,
+            "catalyst_rules": catalyst_rules,
+            "optimization_analysis": optimization_analysis,
+            "performance_estimation": performance_estimation,
+            "explain_output": explain_output,
+            "query_complexity": len(query.split()) // 3 + 1  # Simple complexity metric
+        })
+        
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Catalyst explanation failed", extra={
+            'operation': 'catalyst_explain_failed',
+            'explain_id': explain_id,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+def parse_logical_plan(plan_str):
+    """Parse logical plan string into structured format"""
+    lines = plan_str.split('\n')
+    parsed_nodes = []
+    
+    for line in lines:
+        if line.strip():
+            # Extract operation type and details
+            if '+- ' in line or '   ' in line:
+                indent_level = (len(line) - len(line.lstrip())) // 3
+                operation = line.strip().split('(')[0] if '(' in line else line.strip()
+                parsed_nodes.append({
+                    'operation': operation,
+                    'indent': indent_level,
+                    'details': line.strip(),
+                    'type': 'logical'
+                })
+    
+    return parsed_nodes
+
+def parse_optimized_plan(plan_str):
+    """Parse optimized logical plan"""
+    lines = plan_str.split('\n')
+    optimizations_found = []
+    
+    for line in lines:
+        if line.strip():
+            if any(opt in line.lower() for opt in ['filter', 'project', 'aggregate', 'join']):
+                optimizations_found.append({
+                    'operation': line.strip(),
+                    'optimization_type': 'pushdown' if 'filter' in line.lower() else 'projection',
+                    'description': f"Optimized: {line.strip()}"
+                })
+    
+    return optimizations_found
+
+def parse_physical_plan(plan_str):
+    """Parse physical execution plan"""
+    lines = plan_str.split('\n')
+    physical_ops = []
+    
+    for line in lines:
+        if line.strip() and ('Exchange' in line or 'Scan' in line or 'HashAggregate' in line):
+            physical_ops.append({
+                'operation': line.strip(),
+                'cost_estimate': estimate_operation_cost(line),
+                'parallelism': extract_parallelism_info(line)
+            })
+    
+    return physical_ops
+
+def analyze_query_optimizations(query, data):
+    """Analyze potential optimizations for the query"""
+    optimizations = []
+    
+    # Check for common optimization opportunities
+    if 'SELECT *' in query.upper():
+        optimizations.append({
+            'type': 'column_pruning',
+            'description': 'Consider selecting only needed columns instead of SELECT *',
+            'impact': 'high',
+            'suggestion': 'Replace SELECT * with specific column names'
+        })
+    
+    if 'ORDER BY' in query.upper() and 'LIMIT' not in query.upper():
+        optimizations.append({
+            'type': 'sort_optimization',
+            'description': 'Full sort without limit may be expensive',
+            'impact': 'medium',
+            'suggestion': 'Consider adding LIMIT if you don\'t need all results'
+        })
+    
+    if query.upper().count('JOIN') > 1:
+        optimizations.append({
+            'type': 'join_optimization',
+            'description': 'Multiple joins detected - consider join order optimization',
+            'impact': 'high',
+            'suggestion': 'Ensure smaller tables are on the right side of joins'
+        })
+    
+    return optimizations
+
+def estimate_operation_cost(operation_line):
+    """Estimate cost of physical operation"""
+    if 'Exchange' in operation_line:
+        return {'type': 'network', 'cost': 'high', 'reason': 'Data shuffle required'}
+    elif 'Scan' in operation_line:
+        return {'type': 'io', 'cost': 'medium', 'reason': 'Data source scan'}
+    elif 'Aggregate' in operation_line:
+        return {'type': 'compute', 'cost': 'medium', 'reason': 'Aggregation computation'}
+    else:
+        return {'type': 'compute', 'cost': 'low', 'reason': 'Simple operation'}
+
+def extract_parallelism_info(operation_line):
+    """Extract parallelism information from operation"""
+    if 'Exchange' in operation_line:
+        return {'parallel': True, 'reason': 'Data redistribution across partitions'}
+    elif 'Scan' in operation_line:
+        return {'parallel': True, 'reason': 'Parallel data source reading'}
+    else:
+        return {'parallel': False, 'reason': 'Sequential operation'}
+
+def estimate_query_performance(query, data_size):
+    """Estimate query performance characteristics"""
+    complexity_score = 1
+    
+    # Increase complexity based on operations
+    if 'JOIN' in query.upper():
+        complexity_score += 3
+    if 'GROUP BY' in query.upper():
+        complexity_score += 2
+    if 'ORDER BY' in query.upper():
+        complexity_score += 2
+    if 'WINDOW' in query.upper():
+        complexity_score += 4
+    
+    # Estimate based on data size
+    base_time = 0.1  # Base execution time in seconds
+    size_factor = 1 if data_size <= 10000 else data_size / 10000  # Scaling factor
+    
+    estimated_time = base_time * complexity_score * size_factor
+    
+    return {
+        'complexity_score': complexity_score,
+        'estimated_execution_time': round(estimated_time, 2),
+        'bottleneck_prediction': predict_bottleneck(query),
+        'scaling_characteristics': analyze_scaling(complexity_score)
+    }
+
+def predict_bottleneck(query):
+    """Predict likely performance bottlenecks"""
+    if 'JOIN' in query.upper() and 'GROUP BY' in query.upper():
+        return {'type': 'shuffle', 'description': 'Join followed by aggregation likely to cause data shuffle'}
+    elif 'ORDER BY' in query.upper():
+        return {'type': 'sort', 'description': 'Global sort may require data shuffle'}
+    elif 'DISTINCT' in query.upper():
+        return {'type': 'deduplication', 'description': 'Distinct operation requires data comparison'}
+    else:
+        return {'type': 'io', 'description': 'Data reading likely to be the main cost'}
+
+def analyze_scaling(complexity_score):
+    """Analyze how the query scales with data size"""
+    if complexity_score <= 2:
+        return {'scaling': 'linear', 'description': 'Performance scales linearly with data size'}
+    elif complexity_score <= 5:
+        return {'scaling': 'n_log_n', 'description': 'Performance scales as O(n log n) due to sorting/grouping'}
+    else:
+        return {'scaling': 'quadratic', 'description': 'Complex operations may scale quadratically'}
+
+def generate_mock_catalyst_analysis(query, data_size):
+    """Generate mock Catalyst analysis when Spark is not available"""
+    
+    # Analyze query structure
+    query_upper = query.upper()
+    has_where = 'WHERE' in query_upper
+    has_group_by = 'GROUP BY' in query_upper
+    has_order_by = 'ORDER BY' in query_upper
+    has_join = 'JOIN' in query_upper
+    has_subquery = '(' in query and 'SELECT' in query_upper
+    has_aggregate = any(func in query_upper for func in ['COUNT', 'SUM', 'AVG', 'MAX', 'MIN'])
+    
+    # Mock logical plan
+    logical_plan = []
+    if has_order_by:
+        logical_plan.append({
+            'operation': 'Sort',
+            'details': f"Sort [total_revenue DESC NULLS LAST]",
+            'type': 'logical'
+        })
+    if has_group_by:
+        logical_plan.append({
+            'operation': 'Aggregate',
+            'details': f"Aggregate [category], [count() as transaction_count, avg(price * quantity) as avg_revenue, sum(price * quantity) as total_revenue]",
+            'type': 'logical'
+        })
+    if has_where:
+        logical_plan.append({
+            'operation': 'Filter',
+            'details': f"Filter (price > 100)",
+            'type': 'logical'
+        })
+    logical_plan.append({
+        'operation': 'Relation',
+        'details': f"Relation [data_table] ({data_size} rows)",
+        'type': 'logical'
+    })
+    
+    # Mock optimized plan
+    optimized_plan = []
+    if has_where:
+        optimized_plan.append({
+            'operation': 'Filter pushed down',
+            'optimization_type': 'pushdown',
+            'description': 'Predicate pushdown applied: filter moved closer to data source'
+        })
+    if has_aggregate:
+        optimized_plan.append({
+            'operation': 'Aggregate optimization',
+            'optimization_type': 'aggregation',
+            'description': 'Partial aggregation enabled for better performance'
+        })
+    
+    # Mock physical plan
+    physical_plan = []
+    if has_order_by:
+        physical_plan.append({
+            'operation': 'TakeOrderedAndProject',
+            'cost_estimate': {'cost': 'high', 'type': 'sort'},
+            'parallelism': {'parallel': False}
+        })
+    if has_group_by:
+        physical_plan.append({
+            'operation': 'HashAggregate',
+            'cost_estimate': {'cost': 'medium', 'type': 'hash'},
+            'parallelism': {'parallel': True}
+        })
+    if has_where:
+        physical_plan.append({
+            'operation': 'Filter',
+            'cost_estimate': {'cost': 'low', 'type': 'filter'},
+            'parallelism': {'parallel': True}
+        })
+    physical_plan.append({
+        'operation': 'FileScan',
+        'cost_estimate': {'cost': 'medium', 'type': 'io'},
+        'parallelism': {'parallel': True}
+    })
+    
+    # Mock Catalyst rules
+    catalyst_rules = [
+        {
+            'rule_name': 'ConstantFolding',
+            'description': 'Replaces expressions that can be statically evaluated with their results',
+            'applied': 'WHERE 1=1' in query_upper or any(op in query for op in ['100', '5']),
+            'impact': 'Eliminates unnecessary condition evaluation'
+        },
+        {
+            'rule_name': 'PredicatePushdown',
+            'description': 'Pushes filter conditions down to data sources',
+            'applied': has_where,
+            'impact': 'Reduces data read from source by early filtering'
+        },
+        {
+            'rule_name': 'ColumnPruning',
+            'description': 'Eliminates unused columns from query execution',
+            'applied': 'SELECT *' not in query_upper,
+            'impact': 'Reduces memory usage and I/O'
+        },
+        {
+            'rule_name': 'AggregateOptimization',
+            'description': 'Optimizes aggregation operations',
+            'applied': has_aggregate,
+            'impact': 'Uses hash-based aggregation for better performance'
+        },
+        {
+            'rule_name': 'BooleanSimplification',
+            'description': 'Simplifies boolean expressions',
+            'applied': 'AND' in query_upper or 'OR' in query_upper or has_where,
+            'impact': 'Faster boolean expression evaluation'
+        }
+    ]
+    
+    # Mock optimization analysis
+    optimization_analysis = []
+    if not has_where and data_size > 1000:
+        optimization_analysis.append({
+            'type': 'filter_missing',
+            'description': 'No WHERE clause found on large dataset',
+            'impact': 'high',
+            'suggestion': 'Add filtering conditions to reduce data processing'
+        })
+    if 'SELECT *' in query_upper:
+        optimization_analysis.append({
+            'type': 'column_selection',
+            'description': 'SELECT * reads all columns',
+            'impact': 'medium',
+            'suggestion': 'Select only required columns to reduce I/O'
+        })
+    if has_order_by and not has_where:
+        optimization_analysis.append({
+            'type': 'sort_optimization',
+            'description': 'Global sort without filtering',
+            'impact': 'high',
+            'suggestion': 'Consider filtering data before sorting to reduce sort cost'
+        })
+    
+    # Mock performance estimation
+    performance_estimation = estimate_query_performance(query, data_size)
+    
+    # Mock explain output
+    explain_output = f"""== Parsed Logical Plan ==
+{chr(10).join([f"+- {op['operation']}: {op['details']}" for op in logical_plan])}
+
+== Analyzed Logical Plan ==
+category: string, transaction_count: bigint, avg_revenue: double, total_revenue: double
+{chr(10).join([f"+- {op['operation']}: {op['details']}" for op in logical_plan])}
+
+== Optimized Logical Plan ==
+{chr(10).join([f"+- {op['operation']}" for op in optimized_plan])}
+
+== Physical Plan ==
+{chr(10).join([f"*({i+1}) {op['operation']}" for i, op in enumerate(physical_plan)])}
+
+[Note: This is a mock analysis generated when Spark is not available]"""
+    
+    return {
+        "success": True,
+        "plan_analysis": {
+            "logical_plan": logical_plan,
+            "optimized_plan": optimized_plan,
+            "physical_plan": physical_plan
+        },
+        "catalyst_rules": catalyst_rules,
+        "optimization_analysis": optimization_analysis,
+        "performance_estimation": performance_estimation,
+        "explain_output": explain_output,
+        "query_complexity": 10 if len(query.split()) // 3 + 1 > 10 else len(query.split()) // 3 + 1
+    }
+
+@app.route('/api/delta-operations', methods=['POST'])
+def delta_operations():
+    """Execute Delta Lake operations with ACID transactions and time travel"""
+    start_time = time.time()
+    operation_id = f"delta_op_{int(time.time() * 1000)}"
+    
+    logger.info("Delta Lake operation started", extra={
+        'operation': 'delta_operation_start',
+        'operation_id': operation_id,
+        'remote_addr': request.remote_addr
+    })
+    
+    try:
+        data = request.get_json()
+        operation = data.get('operation')
+        sql = data.get('sql')
+        time_travel = data.get('time_travel')
+        
+        logger.info("Delta operation parameters", extra={
+            'operation': 'delta_operation_params',
+            'operation_id': operation_id,
+            'delta_operation': operation,
+            'sql_length': len(sql) if sql else 0,
+            'time_travel_enabled': bool(time_travel)
+        })
+        
+        # Configure Spark for Delta Lake
+        spark.conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+        spark.conf.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+        
+        # Enable optimizations
+        spark.conf.set("spark.sql.adaptive.enabled", "true")
+        spark.conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
+        
+        # Execute operation
+        execution_start = time.time()
+        
+        # Apply time travel if specified
+        if time_travel and time_travel.get('enabled'):
+            if time_travel.get('version') is not None:
+                sql = f"SELECT * FROM delta_transactions VERSION AS OF {time_travel['version']}"
+            elif time_travel.get('timestamp'):
+                sql = f"SELECT * FROM delta_transactions TIMESTAMP AS OF '{time_travel['timestamp']}'"
+        
+        # Execute the SQL
+        result_df = spark.sql(sql)
+        
+        # For queries that return data, collect results
+        operation_result = None
+        if sql.strip().upper().startswith('SELECT'):
+            results = [row.asDict() for row in result_df.collect()[:50]]
+            operation_result = {
+                'query_results': results,
+                'row_count': len(results)
+            }
+        else:
+            # For DDL/DML operations, just execute
+            operation_result = {
+                'success': True,
+                'message': f'{operation} completed successfully'
+            }
+        
+        execution_time = time.time() - execution_start
+        
+        # Get table information
+        table_info = get_delta_table_info()
+        
+        # Get version history
+        version_history = get_delta_version_history()
+        
+        # Create transaction result
+        transaction_result = {
+            'success': True,
+            'version': len(version_history),
+            'timestamp': datetime.now().isoformat(),
+            'rows_added': 0,
+            'rows_updated': 0,
+            'rows_deleted': 0,
+            'transaction_id': operation_id
+        }
+        
+        # Estimate transaction impact based on operation
+        if operation == 'insert_data':
+            transaction_result['rows_added'] = 5
+        elif operation == 'upsert_merge':
+            transaction_result['rows_added'] = 1
+            transaction_result['rows_updated'] = 1
+        elif operation == 'delete_records':
+            transaction_result['rows_deleted'] = 1
+        
+        logger.info("Delta Lake operation completed", extra={
+            'operation': 'delta_operation_complete',
+            'operation_id': operation_id,
+            'delta_operation': operation,
+            'execution_time': execution_time,
+            'version_count': len(version_history)
+        })
+        
+        response = {
+            "success": True,
+            "operation_result": operation_result,
+            "table_info": table_info,
+            "version_history": version_history,
+            "transaction_result": transaction_result,
+            "execution_time": execution_time
+        }
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error("Delta Lake operation failed", extra={
+            'operation': 'delta_operation_failed',
+            'operation_id': operation_id,
+            'delta_operation': operation,
+            'error_type': type(e).__name__,
+            'error_message': str(e),
+            'processing_time': total_time,
+            'traceback': traceback.format_exc()
+        })
+        
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+def get_delta_table_info():
+    """Get Delta table metadata and information"""
+    try:
+        # Mock Delta table info - in real implementation would use Delta APIs
+        return {
+            'path': '/tmp/delta-table/delta_transactions',
+            'partitionColumns': ['category'],
+            'format': 'delta',
+            'id': 'delta_transactions_001',
+            'name': 'delta_transactions',
+            'description': 'Sample transaction table with Delta Lake features',
+            'provider': 'delta',
+            'properties': {
+                'delta.autoOptimize.optimizeWrite': 'true',
+                'delta.autoOptimize.autoCompact': 'true'
+            }
+        }
+    except Exception:
+        return None
+
+def get_delta_version_history():
+    """Get Delta table version history"""
+    try:
+        # Mock version history - in real implementation would query Delta log
+        base_time = datetime.now()
+        versions = []
+        
+        operations = [
+            ('CREATE TABLE', 'Table creation with partitioning'),
+            ('INSERT', 'Initial data load'),
+            ('MERGE', 'UPSERT operation'),
+            ('DELETE', 'Data cleanup'),
+            ('OPTIMIZE', 'File compaction'),
+            ('VACUUM', 'Old file cleanup')
+        ]
+        
+        for i, (op, desc) in enumerate(operations):
+            version_time = base_time - timedelta(minutes=(len(operations) - i) * 5)
+            versions.append({
+                'version': i,
+                'timestamp': version_time.isoformat(),
+                'operation': op,
+                'operation_parameters': {'description': desc},
+                'user_metadata': {},
+                'is_blind_append': op == 'INSERT',
+                'ready_commit_timestamp': int(version_time.timestamp() * 1000)
+            })
+        
+        return versions
+    except Exception:
+        return []
+
+# Global error handlers
+@app.errorhandler(404)
+def handle_404(error):
+    return jsonify({
+        'success': False,
+        'error': 'API endpoint not found',
+        'message': 'The requested API endpoint does not exist. Please check the URL and try again.',
+        'details': {
+            'requested_url': request.url,
+            'method': request.method,
+            'available_endpoints': [
+                '/api/health',
+                '/api/word-count',
+                '/api/analyze-csv',
+                '/api/sql-query',
+                '/api/analyze-query-complexity',
+                '/api/sample-datasets',
+                '/api/upload-csv'
+            ]
+        }
+    }), 404
+
+@app.errorhandler(405)
+def handle_405(error):
+    return jsonify({
+        'success': False,
+        'error': 'Method not allowed',
+        'message': f'HTTP method {request.method} not allowed for this endpoint.',
+        'details': {
+            'requested_method': request.method,
+            'requested_url': request.url
+        }
+    }), 405
+
+@app.errorhandler(500)
+def handle_500(error):
+    error_id = str(int(time.time() * 1000))
+    logger.error(f"Internal server error: {error}", extra={
+        'operation': 'global_error_handler',
+        'error_type': type(error).__name__,
+        'error_id': error_id,
+        'url': request.url,
+        'method': request.method
+    })
+    return jsonify({
+        'success': False,
+        'error': 'Internal server error',
+        'message': 'An internal server error occurred. Please try again later.',
+        'details': {
+            'error_id': error_id,
+            'timestamp': datetime.now().isoformat()
+        }
+    }), 500
+
+# Catch-all route for undefined API endpoints
+@app.route('/api/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
+def catch_all_api(path):
+    return jsonify({
+        'success': False,
+        'error': 'API endpoint not found',
+        'message': f"API endpoint '/api/{path}' not found.",
+        'details': {
+            'requested_path': f'/api/{path}',
+            'method': request.method,
+            'suggestion': 'Check API documentation for available endpoints'
+        }
+    }), 404
 
 # API-only routes - frontend served by Next.js dev server
 
